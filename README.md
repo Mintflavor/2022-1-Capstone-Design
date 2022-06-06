@@ -57,7 +57,7 @@ Rank : 공동 3위 (총 8팀)
 - 매출액에 양, 음의 영향을 미치는 Feature를 상관분석을 활용하여 각 Feature 상관계수의 부호를 Feature Importance에 곱한다.
 ![Correlation](https://github.com/Mintflavor/2022-1-Capstone-Design/blob/main/assets/img5.png)
 - 각 상권 데이터의 가장 최근 분기 데이터와 Feature Importance를 내적한다.
-$$[Data records for each commercial district]^T\cdot[Feature Importance]=Score$$
+$$[Data\;records\;for\;each\;commercial\;district]^T\cdot[Feature\;Importance]=Score$$
 - Min-Max Scale을 적용하여 각 점수를 표준화 한다.
 $$Score_{scaled}=\frac{Score-Score_{min}}{Score_{max}-Score_{min}}$$
 - 최종적으로 각 점수를 내림차순으로 정렬하고 순위를 매겨 사용자가 선택한 상권이 어느정도 랭크인지 점수와 함께 보여준다.
