@@ -45,126 +45,126 @@
 </head>
 
 <body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html" style="height: unset;">
-                <div class="sidebar-brand-icon">
-                    <img src="{{ url_for('static', filename='img/logo_black.png') }}" alt="" style='height: 80%; width: 80%; object-fit: contain'>
-                </div>
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html" style="height: unset;">
+            <div class="sidebar-brand-icon">
+                <img src="{{ url_for('static', filename='img/logo_black.png') }}" alt="" style='height: 80%; width: 80%; object-fit: contain'>
+            </div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="dashboard.html">
+                <i class="fas fa-fw fa-bar-chart"></i>
+                <span>Dashboard</span>
             </a>
+        </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="dashboard.html">
-                    <i class="fas fa-fw fa-bar-chart"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="compare.html">
+                <i class="fas fa-fw fa-reorder"></i>
+                <span>Compare</span>
+            </a>
+        </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="compare.html">
-                    <i class="fas fa-fw fa-reorder"></i>
-                    <span>Compare</span>
-                </a>
-            </li>
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="map.html">
+                <i class="fas fa-fw fa-map-marker"></i>
+                <span>Map</span>
+            </a>
+        </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="map.html">
-                    <i class="fas fa-fw fa-map-marker"></i>
-                    <span>Map</span>
-                </a>
-            </li>
+    </ul>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+        <!-- Main Content -->
+        <div id="content">
 
-        </ul>
-        <!-- End of Sidebar -->
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-            <!-- Main Content -->
-            <div id="content">
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" 
+                <!-- Topbar Search -->
+                <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                         method="get" action="/dashboard.html">
-                        <div class="input-group">
-                            <select id="guSelect" class="form-select mr-2" aria-label="gu" name="gu">
-                                {% if gu == "" %}
+                    <div class="input-group">
+                        <select id="guSelect" class="form-select mr-2" aria-label="gu" name="gu">
+                            {% if gu == "" %}
                                 <option selected disabled>구 선택</option>
-                                {% else %}
+                            {% else %}
                                 <option selected>{{ gu }}</option>
-                                {% endif %}
-                                {% for gu in guList %}
+                            {% endif %}
+                            {% for gu in guList %}
                                 <option>{{ gu }}</option>
-                                {% endfor %}
-                            </select>
-                            <select id="dongSelect" class="form-select mr-2" aria-label="dong" name="dong">
-                                {% if dong == "" %}
+                            {% endfor %}
+                        </select>
+                        <select id="dongSelect" class="form-select mr-2" aria-label="dong" name="dong">
+                            {% if dong == "" %}
                                 <option selected disabled>동 선택</option>
-                                {% else %}
+                            {% else %}
                                 <option selected>{{ dong }}</option>
-                                {% endif %}
-                                {% for dong in dongList %}
+                            {% endif %}
+                            {% for dong in dongList %}
                                 <option>{{ dong }}</option>
-                                {% endfor %}
-                            </select>
-                            <select id="districtSelect" class="form-select mr-2" aria-label="district" name="district">
-                                {% if district == "" %}
+                            {% endfor %}
+                        </select>
+                        <select id="districtSelect" class="form-select mr-2" aria-label="district" name="district">
+                            {% if district == "" %}
                                 <option selected disabled>상권명 선택</option>
-                                {% else %}
+                            {% else %}
                                 <option selected>{{ district }}</option>
-                                {% endif %}
-                                {% for district in districts %}
+                            {% endif %}
+                            {% for district in districts %}
                                 <option>{{ district }}</option>
-                                {% endfor %}
-                            </select>
-                            <select id="categorySelect" class="form-select mr-2" aria-label="category" name="category">
-                                {% if category == "" %}
+                            {% endfor %}
+                        </select>
+                        <select id="categorySelect" class="form-select mr-2" aria-label="category" name="category">
+                            {% if category == "" %}
                                 <option selected disabled>업종명 선택</option>
-                                {% else %}
+                            {% else %}
                                 <option selected>{{ category }}</option>
-                                {% endif %}
-                                {% for category in categories %}
+                            {% endif %}
+                            {% for category in categories %}
                                 <option>{{ category }}</option>
-                                {% endfor %}
-                            </select>
-                            <div class="input-group-append">
-                                <button id="searchBtn" class="btn btn-primary disabled" type="submit" disabled>
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
+                            {% endfor %}
+                        </select>
+                        <div class="input-group-append">
+                            <button id="searchBtn" class="btn btn-primary disabled" type="submit" disabled>
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
                         </div>
-                    </form>
-                </nav>
-                <!-- End of Topbar -->
-{% block content %}{% endblock %}
+                    </div>
+                </form>
+            </nav>
+            <!-- End of Topbar -->
+            {% block content %}{% endblock %}
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -218,11 +218,11 @@
                     method: "GET",
                     dataType: "script"
                 })
-                .done(function(script) {
-                    $('#dongSelect').empty().populateDisabled(['동 선택']).populate(eval(script));
-                    $('#searchBtn').addClass('disabled');
-                    $('#searchBtn').attr('disabled', true);
-                });
+                    .done(function(script) {
+                        $('#dongSelect').empty().populateDisabled(['동 선택']).populate(eval(script));
+                        $('#searchBtn').addClass('disabled');
+                        $('#searchBtn').attr('disabled', true);
+                    });
             });
         })
 
@@ -234,11 +234,11 @@
                     method: "GET",
                     dataType: "script"
                 })
-                .done(function(script) {
-                    $('#districtSelect').empty().populateDisabled(['상권명 선택']).populate(eval(script));
-                    $('#searchBtn').addClass('disabled');
-                    $('#searchBtn').attr('disabled', true);
-                });
+                    .done(function(script) {
+                        $('#districtSelect').empty().populateDisabled(['상권명 선택']).populate(eval(script));
+                        $('#searchBtn').addClass('disabled');
+                        $('#searchBtn').attr('disabled', true);
+                    });
             });
         })
 
@@ -250,11 +250,11 @@
                     method: "GET",
                     dataType: "script"
                 })
-                .done(function(script) {
-                    $('#categorySelect').empty().populateDisabled(['업종명 선택']).populate(eval(script));
-                    $('#searchBtn').addClass('disabled');
-                    $('#searchBtn').attr('disabled', true);
-                });
+                    .done(function(script) {
+                        $('#categorySelect').empty().populateDisabled(['업종명 선택']).populate(eval(script));
+                        $('#searchBtn').addClass('disabled');
+                        $('#searchBtn').attr('disabled', true);
+                    });
             });
         })
 

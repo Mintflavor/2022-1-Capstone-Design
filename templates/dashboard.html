@@ -1,123 +1,123 @@
 {% extends "base.html" %}
 {% block content %}
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">{{ districtCategory }}</h1>
-                        <a onclick="savePDF();" id="generateReport" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">{{ districtCategory }}</h1>
+            <a onclick="savePDF();" id="generateReport" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
+        <!-- Content Row -->
+        <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-lg font-weight-bold text-primary text-uppercase mb-1" style="font-size: 2rem;">
-                                                지리적 특성</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                {% if countParking %}
-                                                주변 공영주차장 <span class="text-info">{{ countParking }}개</span><br>
-                                                {% endif %}
-                                                {% if countSchool %}
-                                                주변 초중고교 수 <span class="text-info">{{ countSchool }}개</span><br>
-                                                {% endif %}
-                                                {% if countUniv %}
-                                                주변 대학교 수 <span class="text-info">{{ countUniv }}개</span><br>
-                                                {% endif %}
-                                                {% if countTransport %}
-                                                주변 교통시설 수 <span class="text-info">{{ countTransport }}개</span><br>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-map fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-lg font-weight-bold text-primary text-uppercase mb-1" style="font-size: 2rem;">
+                                    지리적 특성</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    {% if countParking %}
+                                        주변 공영주차장 <span class="text-info">{{ countParking }}개</span><br>
+                                    {% endif %}
+                                    {% if countSchool %}
+                                        주변 초중고교 수 <span class="text-info">{{ countSchool }}개</span><br>
+                                    {% endif %}
+                                    {% if countUniv %}
+                                        주변 대학교 수 <span class="text-info">{{ countUniv }}개</span><br>
+                                    {% endif %}
+                                    {% if countTransport %}
+                                        주변 교통시설 수 <span class="text-info">{{ countTransport }}개</span><br>
+                                    {% endif %}
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-lg font-weight-bold text-success text-uppercase mb-1" style="font-size: 2rem;">
-                                                긍정적 요소</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                {% if floatingPopChangeRatio[-1] > 0 %}
-                                                유동인구 {{ floatingPopChangeRatioIndex[-1] }} 변화율 : <span class="text-primary">{{ floatingPopChangeRatio[-1] }}%</span><br>
-                                                {% endif %}
-                                                {% if quarterSalesVolumeChangeRatio[-1] > 0 %}
-                                                매출규모 {{ quarterSalesVolumeChangeRatioIndex[-1] }} 변화율 : <span class="text-primary">{{ quarterSalesVolumeChangeRatio[-1] }}%</span><br>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-check-circle fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1" style="font-size: 2rem;">
-                                                부정적 요소</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                {% if floatingPopChangeRatio[-1] < 0 %}
-                                                유동인구 {{ floatingPopChangeRatioIndex[-1] }} 변화율 : <span class="text-danger">{{ floatingPopChangeRatio[-1] }}%</span><br>
-                                                {% endif %}
-                                                {% if quarterSalesVolumeChangeRatio[-1] < 0 %}
-                                                매출규모 {{ quarterSalesVolumeChangeRatioIndex[-1] }} 변화율 : <span class="text-danger">{{ quarterSalesVolumeChangeRatio[-1] }}%</span><br>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-times-circle fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-auto">
+                                <i class="fas fa-map fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
-                        <!-- 서울 전체 상권 랭크 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h3 class="m-0 font-weight-bold text-primary" style="float: left;">서울 전체 상권 랭크</h3>
-                                    <a id="seoulDistrictsRankBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-lg font-weight-bold text-success text-uppercase mb-1" style="font-size: 2rem;">
+                                    긍정적 요소</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    {% if floatingPopChangeRatio[-1] > 0 %}
+                                        유동인구 {{ floatingPopChangeRatioIndex[-1] }} 변화율 : <span class="text-primary">{{ floatingPopChangeRatio[-1] }}%</span><br>
+                                    {% endif %}
+                                    {% if quarterSalesVolumeChangeRatio[-1] > 0 %}
+                                        매출규모 {{ quarterSalesVolumeChangeRatioIndex[-1] }} 변화율 : <span class="text-primary">{{ quarterSalesVolumeChangeRatio[-1] }}%</span><br>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-lg font-weight-bold text-warning text-uppercase mb-1" style="font-size: 2rem;">
+                                    부정적 요소</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    {% if floatingPopChangeRatio[-1] < 0 %}
+                                        유동인구 {{ floatingPopChangeRatioIndex[-1] }} 변화율 : <span class="text-danger">{{ floatingPopChangeRatio[-1] }}%</span><br>
+                                    {% endif %}
+                                    {% if quarterSalesVolumeChangeRatio[-1] < 0 %}
+                                        매출규모 {{ quarterSalesVolumeChangeRatioIndex[-1] }} 변화율 : <span class="text-danger">{{ quarterSalesVolumeChangeRatio[-1] }}%</span><br>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-times-circle fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+            <!-- 서울 전체 상권 랭크 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h3 class="m-0 font-weight-bold text-primary" style="float: left;">서울 전체 상권 랭크</h3>
+                        <a id="seoulDistrictsRankBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-info-circle"></i>
                                         </span>
-                                        <span id="seoulDistrictsRankBtnText" class="text" onclick="(function(){$('#seoulDistrictsRankModal').modal();})()">기준</span>
-                                    </a>
-                                    <a id="seoulDistrictsRankExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
+                            <span id="seoulDistrictsRankBtnText" class="text" onclick="(function(){$('#seoulDistrictsRankModal').modal();})()">기준</span>
+                        </a>
+                        <a id="seoulDistrictsRankExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-expand"></i>
                                         </span>
-                                        <span id="seoulDistrictsRankExpandBtnText" class="text" onclick="(function(){$('#seoulDistrictsRankExpandModal').modal();})()">더보기</span>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area" id="seoulDistrictsRankDIV" style="display: table;">
-                                        <div style="display: table-cell; vertical-align: middle;">
+                            <span id="seoulDistrictsRankExpandBtnText" class="text" onclick="(function(){$('#seoulDistrictsRankExpandModal').modal();})()">더보기</span>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area" id="seoulDistrictsRankDIV" style="display: table;">
+                            <div style="display: table-cell; vertical-align: middle;">
                                             <span style="font-size: 20px; font-weight: bold;">
                                                 {% if seoulRankM1Score == -1 %}
                                                     <mark><span style="background-color: yellow;">Rank 1. {{ seoulRank1District }} 100점</span></mark><br>
@@ -148,32 +148,32 @@
                                                     {% endif %}
                                                 {% endif %}
                                             </span>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <!-- 지역구 내 상권 랭크 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h3 class="m-0 font-weight-bold text-primary" style="float: left;">지역구 내 상권 랭크</h3>
-                                    <a id="guDistrictsRankBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
+                    </div>
+                </div>
+            </div>
+            <!-- 지역구 내 상권 랭크 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h3 class="m-0 font-weight-bold text-primary" style="float: left;">지역구 내 상권 랭크</h3>
+                        <a id="guDistrictsRankBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-info-circle"></i>
                                         </span>
-                                        <span id="guDistrictsRankBtnText" class="text" onclick="(function(){$('#guDistrictsRankModal').modal();})()">기준</span>
-                                    </a>
-                                    <a id="guDistrictsRankExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
+                            <span id="guDistrictsRankBtnText" class="text" onclick="(function(){$('#guDistrictsRankModal').modal();})()">기준</span>
+                        </a>
+                        <a id="guDistrictsRankExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-expand"></i>
                                         </span>
-                                        <span id="guDistrictsRankExpandBtnText" class="text" onclick="(function(){$('#guDistrictsRankExpandModal').modal();})()">더보기</span>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area" id="guDistrictsRankDIV" style="display: table;">
-                                        <div style="display: table-cell; vertical-align: middle;">
+                            <span id="guDistrictsRankExpandBtnText" class="text" onclick="(function(){$('#guDistrictsRankExpandModal').modal();})()">더보기</span>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area" id="guDistrictsRankDIV" style="display: table;">
+                            <div style="display: table-cell; vertical-align: middle;">
                                             <span style="font-size: 20px; font-weight: bold;">
                                                 {% if guRankM1Score == -1 %}
                                                     <mark><span style="background-color: yellow;">Rank 1. {{ guRank1District }} 100점</span></mark><br>
@@ -204,257 +204,257 @@
                                                     {% endif %}
                                                 {% endif %}
                                             </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Row -->
-
-                    <div class="row">
-                        <!-- 상권 시간대별 유동인구 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary">상권 시간대별 유동인구</h3>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="timePopDropBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            주변상권 비교
-                                        </button>
-                                        <div class="dropdown-menu animated--fade-in" aria-labelledby="timePopDropBtn" style="">
-                                            {% for nearDistrict in nearDistricts %}
-                                            <a class="dropdown-item" onclick="getNearTimePopData('{{ nearDistrict[0] }}');">{{ nearDistrict[0] }}</a>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="timePopulation"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 성별 매출 비율 파이 차트 -->
-                        <div class="col-xl-3 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary">성별 매출 비율 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="no-data text-center" style="display: none; text-align: center;" id="sexSalesVolumeRatioNoData">
-                                        <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
-                                        <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
-                                    </div>
-                                    <div class="chart-pie pt-2 pb-2" id="sexSalesVolumeRatioDIV">
-                                        <canvas id="sexSalesVolumeRatioChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 연령대별 매출 비율 파이 차트 -->
-                        <div class="col-xl-3 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary">연령대별 매출 비율 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="no-data text-center" style="display: none; text-align: center;" id="ageSalesVolumeRatioNoData">
-                                        <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
-                                        <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
-                                    </div>
-                                    <div class="chart-pie pt-2 pb-2" id="ageSalesVolumeRatioDIV">
-                                        <canvas id="ageSalesVolumeRatioChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-                        <!-- 업종 시간대별 매출금액 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary">업종 시간대별 매출 규모 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="timeSalesVolumeDropBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            주변상권 비교
-                                        </button>
-                                        <div class="dropdown-menu animated--fade-in" aria-labelledby="timeSalesVolumeDropBtn" style="">
-                                            {% for nearDistrict in nearDistricts %}
-                                            <a class="dropdown-item" onclick="getNearTimeSalesVolumeData('{{ nearDistrict[0] }}');">{{ nearDistrict[0] }}</a>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="no-data text-center" style="display: none; text-align: center;" id="timeSalesVolumeNoData">
-                                        <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
-                                        <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
-                                    </div>
-                                    <div class="chart-area" id="timeSalesVolumeDIV">
-                                        <canvas id="timeSalesVolume"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 프랜차이즈 비율 파이 차트 -->
-                        <div class="col-xl-3 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary">프랜차이즈 점포 비율</h3>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="no-data text-center" style="display: none; text-align: center;" id="franchiseRatioNoData">
-                                        <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
-                                        <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
-                                    </div>
-                                    <div class="chart-pie pt-2 pb-2" id="franchiseRatioDIV">
-                                        <canvas id="franchiseRatioChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 업종 밀집도 비율 파이 차트 -->
-                        <div class="col-xl-3 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary">업종 밀집도 비율</h3>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="no-data text-center" style="display: none; text-align: center;" id="categoryDensityNoData">
-                                        <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
-                                        <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
-                                    </div>
-                                    <div class="chart-pie pt-2 pb-2" id="categoryDensityDIV">
-                                        <canvas id="categoryDensityChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-                        <!-- 상권 연도별 유동인구 변화 -->
-                        <div class="col-xl-6 col-lg-7" id="floatingPopContentsDIV">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h3 id="floatingPopTitle" class="m-0 font-weight-bold text-primary" style="float: left;">연도별 유동인구 변화</h3>
-                                    <a id="floatingPopBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exchange"></i>
-                                        </span>
-                                        <span id="floatingPopBtnText" class="text">변화율로 보기</span>
-                                    </a>
-                                    <a id="floatingPopExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i id="floatingPopExpandBtnIcon" class="fas fa-expand"></i>
-                                        </span>
-                                        <span id="floatingPopExpandText" class="text">더보기</span>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="floatingPopulation"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 선택한 상권, 업종 매출 그래프 -->
-                        <div id="quarterSalesVolumeContentsDIV" class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h3 id="quarterSalesVolumeTitle" class="m-0 font-weight-bold text-primary" style="float: left;">분기별 총 매출 규모 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
-                                    <a id="quarterSalesVolumeBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exchange"></i>
-                                        </span>
-                                        <span id="quarterSalesVolumeBtnText" class="text">변화율로 보기</span>
-                                    </a>
-                                    <a id="quarterSalesVolumeExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i id="quarterSalesVolumeExpandBtnIcon" class="fas fa-expand"></i>
-                                        </span>
-                                        <span id="quarterSalesVolumeExpandText" class="text">더보기</span>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <div class="no-data text-center" style="display: none; text-align: center;" id="quarterSalesVolumeNoData">
-                                        <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
-                                        <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
-                                    </div>
-                                    <div class="chart-area" id="quarterSalesVolumeDIV">
-                                        <canvas id="quarterSalesVolume"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 상권 연령대별 유동인구 수 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h3 class="m-0 font-weight-bold text-primary">연령대별 유동인구 수</h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="ageGroupPopulation"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 선택한 상권, 업종 점포당 평균 매출 그래프 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h3 class="m-0 font-weight-bold text-primary" style="float: left;">분기별 점포당 평균 매출 규모 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
-                                    <a id="marketAvgSalesVolumeBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exchange"></i>
-                                        </span>
-                                        <span id="marketAvgSalesVolumeBtnText" class="text">변화율로 보기</span>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <div class="no-data text-center" style="display: none; text-align: center;" id="marketAvgSalesVolumeNoData">
-                                        <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
-                                        <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
-                                    </div>
-                                    <div class="chart-area" id="marketAvgSalesVolumeDIV">
-                                        <canvas id="marketAvgSalesVolume"></canvas>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- 서울 상권 랭크 산정 기준 모달 -->
-            <div class="modal fade" id="seoulDistrictsRankModal" tabindex="-1" aria-labelledby="seoulDistrictsRankModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
+        <!-- Content Row -->
+
+        <div class="row">
+            <!-- 상권 시간대별 유동인구 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary">상권 시간대별 유동인구</h3>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="timePopDropBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                주변상권 비교
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="timePopDropBtn" style="">
+                                {% for nearDistrict in nearDistricts %}
+                                    <a class="dropdown-item" onclick="getNearTimePopData('{{ nearDistrict[0] }}');">{{ nearDistrict[0] }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="timePopulation"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 성별 매출 비율 파이 차트 -->
+            <div class="col-xl-3 col-lg-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary">성별 매출 비율 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="no-data text-center" style="display: none; text-align: center;" id="sexSalesVolumeRatioNoData">
+                            <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
+                            <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
+                        </div>
+                        <div class="chart-pie pt-2 pb-2" id="sexSalesVolumeRatioDIV">
+                            <canvas id="sexSalesVolumeRatioChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 연령대별 매출 비율 파이 차트 -->
+            <div class="col-xl-3 col-lg-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary">연령대별 매출 비율 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="no-data text-center" style="display: none; text-align: center;" id="ageSalesVolumeRatioNoData">
+                            <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
+                            <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
+                        </div>
+                        <div class="chart-pie pt-2 pb-2" id="ageSalesVolumeRatioDIV">
+                            <canvas id="ageSalesVolumeRatioChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+            <!-- 업종 시간대별 매출금액 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary">업종 시간대별 매출 규모 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="timeSalesVolumeDropBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                주변상권 비교
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="timeSalesVolumeDropBtn" style="">
+                                {% for nearDistrict in nearDistricts %}
+                                    <a class="dropdown-item" onclick="getNearTimeSalesVolumeData('{{ nearDistrict[0] }}');">{{ nearDistrict[0] }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="no-data text-center" style="display: none; text-align: center;" id="timeSalesVolumeNoData">
+                            <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
+                            <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
+                        </div>
+                        <div class="chart-area" id="timeSalesVolumeDIV">
+                            <canvas id="timeSalesVolume"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 프랜차이즈 비율 파이 차트 -->
+            <div class="col-xl-3 col-lg-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary">프랜차이즈 점포 비율</h3>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="no-data text-center" style="display: none; text-align: center;" id="franchiseRatioNoData">
+                            <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
+                            <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
+                        </div>
+                        <div class="chart-pie pt-2 pb-2" id="franchiseRatioDIV">
+                            <canvas id="franchiseRatioChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 업종 밀집도 비율 파이 차트 -->
+            <div class="col-xl-3 col-lg-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary">업종 밀집도 비율</h3>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="no-data text-center" style="display: none; text-align: center;" id="categoryDensityNoData">
+                            <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
+                            <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
+                        </div>
+                        <div class="chart-pie pt-2 pb-2" id="categoryDensityDIV">
+                            <canvas id="categoryDensityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+            <!-- 상권 연도별 유동인구 변화 -->
+            <div class="col-xl-6 col-lg-7" id="floatingPopContentsDIV">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h3 id="floatingPopTitle" class="m-0 font-weight-bold text-primary" style="float: left;">연도별 유동인구 변화</h3>
+                        <a id="floatingPopBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-exchange"></i>
+                                        </span>
+                            <span id="floatingPopBtnText" class="text">변화율로 보기</span>
+                        </a>
+                        <a id="floatingPopExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
+                                        <span class="icon text-white-50">
+                                            <i id="floatingPopExpandBtnIcon" class="fas fa-expand"></i>
+                                        </span>
+                            <span id="floatingPopExpandText" class="text">더보기</span>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="floatingPopulation"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 선택한 상권, 업종 매출 그래프 -->
+            <div id="quarterSalesVolumeContentsDIV" class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h3 id="quarterSalesVolumeTitle" class="m-0 font-weight-bold text-primary" style="float: left;">분기별 총 매출 규모 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
+                        <a id="quarterSalesVolumeBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-exchange"></i>
+                                        </span>
+                            <span id="quarterSalesVolumeBtnText" class="text">변화율로 보기</span>
+                        </a>
+                        <a id="quarterSalesVolumeExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
+                                        <span class="icon text-white-50">
+                                            <i id="quarterSalesVolumeExpandBtnIcon" class="fas fa-expand"></i>
+                                        </span>
+                            <span id="quarterSalesVolumeExpandText" class="text">더보기</span>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="no-data text-center" style="display: none; text-align: center;" id="quarterSalesVolumeNoData">
+                            <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
+                            <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
+                        </div>
+                        <div class="chart-area" id="quarterSalesVolumeDIV">
+                            <canvas id="quarterSalesVolume"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 상권 연령대별 유동인구 수 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h3 class="m-0 font-weight-bold text-primary">연령대별 유동인구 수</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="ageGroupPopulation"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 선택한 상권, 업종 점포당 평균 매출 그래프 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h3 class="m-0 font-weight-bold text-primary" style="float: left;">분기별 점포당 평균 매출 규모 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
+                        <a id="marketAvgSalesVolumeBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-exchange"></i>
+                                        </span>
+                            <span id="marketAvgSalesVolumeBtnText" class="text">변화율로 보기</span>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="no-data text-center" style="display: none; text-align: center;" id="marketAvgSalesVolumeNoData">
+                            <img src="{{ url_for('static', filename='img/x.png') }}" alt="" style="display:block; margin: 0px auto;" class="img-fluid px-3 px-sm-4 mt-3 mb-4">
+                            <div class="h1 font-weight-bold text-gray-800">NO DATA</div>
+                        </div>
+                        <div class="chart-area" id="marketAvgSalesVolumeDIV">
+                            <canvas id="marketAvgSalesVolume"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- 서울 상권 랭크 산정 기준 모달 -->
+    <div class="modal fade" id="seoulDistrictsRankModal" tabindex="-1" aria-labelledby="seoulDistrictsRankModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h1 class="modal-title h3 mb-0 text-gray-800" id="seoulDistrictsRankModalLabel">서울 전체 상권 랭크 선정 기준</h1>
-                  </div>
-                  <div class="modal-body" style="display: table;">
+                </div>
+                <div class="modal-body" style="display: table;">
                     <div style="display: table-cell; vertical-align: middle;">
                         <span>
                             다음 변수의 중요도를 활용하여 각 상권 별 점수를 계산합니다.<br/>
@@ -473,19 +473,19 @@
                             $$Score=\frac{Raw\;Score-Raw\;Score_{min}}{Raw\;Score_{max}-Raw\;Score_{min}}$$
                         </span>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
+        </div>
+    </div>
 
-            <!-- 지역구 내 상권 랭크 산정 기준 모달 -->
-            <div class="modal fade" id="guDistrictsRankModal" tabindex="-1" aria-labelledby="guDistrictsRankModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
+    <!-- 지역구 내 상권 랭크 산정 기준 모달 -->
+    <div class="modal fade" id="guDistrictsRankModal" tabindex="-1" aria-labelledby="guDistrictsRankModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h1 class="modal-title h3 mb-0 text-gray-800" id="guDistrictsRankModalLabel">지역구 내 상권 랭크 선정 기준</h1>
-                  </div>
-                  <div class="modal-body" style="display: table;">
+                </div>
+                <div class="modal-body" style="display: table;">
                     <div style="display: table-cell; vertical-align: middle;">
                         <span>
                             다음 변수의 중요도를 활용하여 각 상권 별 점수를 계산합니다.<br/>
@@ -504,19 +504,19 @@
                             $$Score=\frac{Raw\;Score-Raw\;Score_{min}}{Raw\;Score_{max}-Raw\;Score_{min}}$$
                         </span>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
+        </div>
+    </div>
 
-            <!-- 서울 상권 랭크 더보기 모달 -->
-            <div class="modal fade" id="seoulDistrictsRankExpandModal" tabindex="-1" aria-labelledby="seoulDistrictsRankExpandModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
+    <!-- 서울 상권 랭크 더보기 모달 -->
+    <div class="modal fade" id="seoulDistrictsRankExpandModal" tabindex="-1" aria-labelledby="seoulDistrictsRankExpandModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h1 class="modal-title h3 mb-0 text-gray-800" id="seoulDistrictsRankExpandModalLabel">서울 전체 상권 랭크</h1>
-                  </div>
-                  <div class="modal-body" style="display: table;">
+                </div>
+                <div class="modal-body" style="display: table;">
                     <div style="display: table-cell; vertical-align: middle;">
                         <span>
                             {% for idx, (seoulRankDistrict, seoulRankScore) in enumerate(zip(seoulRankWholeDistrict, seoulRankWholeScore)) %}
@@ -524,19 +524,19 @@
                             {% endfor %}
                         </span>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
+        </div>
+    </div>
 
-            <!-- 지역구 내 상권 더보기 기준 모달 -->
-            <div class="modal fade" id="guDistrictsRankExpandModal" tabindex="-1" aria-labelledby="guDistrictsRankExpandModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
+    <!-- 지역구 내 상권 더보기 기준 모달 -->
+    <div class="modal fade" id="guDistrictsRankExpandModal" tabindex="-1" aria-labelledby="guDistrictsRankExpandModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h1 class="modal-title h3 mb-0 text-gray-800" id="guDistrictsRankExpandModalLabel">지역구 내 상권 랭크</h1>
-                  </div>
-                  <div class="modal-body" style="display: table;">
+                </div>
+                <div class="modal-body" style="display: table;">
                     <div style="display: table-cell; vertical-align: middle;">
                         <span>
                             {% for idx, (guRankDistrict, guRankScore) in enumerate(zip(guRankWholeDistrict, guRankWholeScore)) %}
@@ -544,55 +544,55 @@
                             {% endfor %}
                         </span>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
+        </div>
+    </div>
 
-            <!-- noDataModal -->
-            <div class="modal fade" id="noDataModal" tabindex="-1" aria-labelledby="noDataModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
+    <!-- noDataModal -->
+    <div class="modal fade" id="noDataModal" tabindex="-1" aria-labelledby="noDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h1 class="modal-title h3 mb-0 text-gray-800" id="noDataModalLabel">NO DATA</h1>
-                  </div>
-                  <div class="modal-body" style="display: table;">
+                </div>
+                <div class="modal-body" style="display: table;">
                     <div style="display: table-cell; vertical-align: middle;">
                         <p>선택한 상권의 데이터가 존재하지 않습니다!</p>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-            <!-- End of Main Content -->
+        </div>
+    </div>
+    <!-- End of Main Content -->
 
     <script type="text/javascript">
         Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
         Chart.defaults.global.defaultFontColor = '#858796';
 
         function number_format(number, decimals, dec_point, thousands_sep) {
-          // *     example: number_format(1234.56, 2, ',', ' ');
-          // *     return: '1 234,56'
-          number = (number + '').replace(',', '').replace(' ', '');
-          var n = !isFinite(+number) ? 0 : +number,
-            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-            s = '',
-            toFixedFix = function(n, prec) {
-              var k = Math.pow(10, prec);
-              return '' + Math.round(n * k) / k;
-            };
-          // Fix for IE parseFloat(0.55).toFixed(0) = 0;
-          s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-          if (s[0].length > 3) {
-            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-          }
-          if ((s[1] || '').length < prec) {
-            s[1] = s[1] || '';
-            s[1] += new Array(prec - s[1].length + 1).join('0');
-          }
-          return s.join(dec);
+            // *     example: number_format(1234.56, 2, ',', ' ');
+            // *     return: '1 234,56'
+            number = (number + '').replace(',', '').replace(' ', '');
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                s = '',
+                toFixedFix = function(n, prec) {
+                    var k = Math.pow(10, prec);
+                    return '' + Math.round(n * k) / k;
+                };
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
         }
 
         const gu = "{{ gu }}";
@@ -643,28 +643,28 @@
                 method: "GET",
                 dataType: "script"
             })
-            .done(function(script) {
-                dataset = {
-                    label: nearDistrict,
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(255, 0, 0, 0.05)",
-                    borderColor: "rgba(255, 0, 0, 1)",
-                    pointRadius: 3,
-                    pointBackgroundColor: "rgba(255, 0, 0, 1)",
-                    pointBorderColor: "rgba(255, 0, 0, 1)",
-                    pointHoverRadius: 3,
-                    pointHoverBackgroundColor: "rgba(255, 0, 0, 1)",
-                    pointHoverBorderColor: "rgba(255, 0, 0, 1)",
-                    pointHitRadius: 10,
-                    pointBorderWidth: 2,
-                    data: eval(script),
-                };
-                if (timePopChart.data.datasets.length == 2) {
-                    timePopChart.data.datasets.splice(-1, 1);
-                }
-                timePopChart.data.datasets.push(dataset);
-                timePopChart.update()
-            });
+                .done(function(script) {
+                    dataset = {
+                        label: nearDistrict,
+                        lineTension: 0.3,
+                        backgroundColor: "rgba(255, 0, 0, 0.05)",
+                        borderColor: "rgba(255, 0, 0, 1)",
+                        pointRadius: 3,
+                        pointBackgroundColor: "rgba(255, 0, 0, 1)",
+                        pointBorderColor: "rgba(255, 0, 0, 1)",
+                        pointHoverRadius: 3,
+                        pointHoverBackgroundColor: "rgba(255, 0, 0, 1)",
+                        pointHoverBorderColor: "rgba(255, 0, 0, 1)",
+                        pointHitRadius: 10,
+                        pointBorderWidth: 2,
+                        data: eval(script),
+                    };
+                    if (timePopChart.data.datasets.length == 2) {
+                        timePopChart.data.datasets.splice(-1, 1);
+                    }
+                    timePopChart.data.datasets.push(dataset);
+                    timePopChart.update()
+                });
         }
 
         function getNearTimeSalesVolumeData(nearDistrict) {
@@ -676,32 +676,32 @@
                 method: "GET",
                 dataType: "script"
             })
-            .done(function(script) {
-                if (script == '[]') {
-                    $('#noDataModal').modal();
-                    return;
-                }
-                dataset = {
-                    label: nearDistrict,
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(255, 0, 0, 0.05)",
-                    borderColor: "rgba(255, 0, 0, 1)",
-                    pointRadius: 3,
-                    pointBackgroundColor: "rgba(255, 0, 0, 1)",
-                    pointBorderColor: "rgba(255, 0, 0, 1)",
-                    pointHoverRadius: 3,
-                    pointHoverBackgroundColor: "rgba(255, 0, 0, 1)",
-                    pointHoverBorderColor: "rgba(255, 0, 0, 1)",
-                    pointHitRadius: 10,
-                    pointBorderWidth: 2,
-                    data: eval(script),
-                };
-                if (timeSalesVolumeChart.data.datasets.length == 2) {
-                    timeSalesVolumeChart.data.datasets.splice(-1, 1);
-                }
-                timeSalesVolumeChart.data.datasets.push(dataset);
-                timeSalesVolumeChart.update()
-            });
+                .done(function(script) {
+                    if (script == '[]') {
+                        $('#noDataModal').modal();
+                        return;
+                    }
+                    dataset = {
+                        label: nearDistrict,
+                        lineTension: 0.3,
+                        backgroundColor: "rgba(255, 0, 0, 0.05)",
+                        borderColor: "rgba(255, 0, 0, 1)",
+                        pointRadius: 3,
+                        pointBackgroundColor: "rgba(255, 0, 0, 1)",
+                        pointBorderColor: "rgba(255, 0, 0, 1)",
+                        pointHoverRadius: 3,
+                        pointHoverBackgroundColor: "rgba(255, 0, 0, 1)",
+                        pointHoverBorderColor: "rgba(255, 0, 0, 1)",
+                        pointHitRadius: 10,
+                        pointBorderWidth: 2,
+                        data: eval(script),
+                    };
+                    if (timeSalesVolumeChart.data.datasets.length == 2) {
+                        timeSalesVolumeChart.data.datasets.splice(-1, 1);
+                    }
+                    timeSalesVolumeChart.data.datasets.push(dataset);
+                    timeSalesVolumeChart.update()
+                });
         }
 
         //성별 매출 비율 파이 차트
@@ -711,44 +711,44 @@
 
         var sexSalesVolumeRatioDOM = document.getElementById("sexSalesVolumeRatioChart");
         var sexSalesVolumeRatioChart = new Chart(sexSalesVolumeRatioDOM, {
-          type: 'pie',
-          data: {
-            labels: sexSalesVolumeRatioIndex,
-            datasets: [{
-              data: sexSalesVolumeRatio,
-              backgroundColor: ["#36b9cc", "#e74a3b"],
-              hoverBackgroundColor: "#858796",
-              hoverBorderColor: "rgba(234, 236, 244, 1)",
-            }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            tooltips: {
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, data) {
-                    const value = data['datasets'][0]['data'][tooltipItem['index']]
-                    const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
-                        return sum + currValue;
-                    }, 0);
-                    return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "원, " + Math.round((value/sum)*100) + "%";
-                }
-              }
+            type: 'pie',
+            data: {
+                labels: sexSalesVolumeRatioIndex,
+                datasets: [{
+                    data: sexSalesVolumeRatio,
+                    backgroundColor: ["#36b9cc", "#e74a3b"],
+                    hoverBackgroundColor: "#858796",
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
             },
-            legend: {
-              display: true,
-              reverse: true,
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            const value = data['datasets'][0]['data'][tooltipItem['index']]
+                            const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
+                                return sum + currValue;
+                            }, 0);
+                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "원, " + Math.round((value/sum)*100) + "%";
+                        }
+                    }
+                },
+                legend: {
+                    display: true,
+                    reverse: true,
+                },
+                cutoutPercentage: 80,
             },
-            cutoutPercentage: 80,
-          },
         });
 
         if (sexSalesVolumeRatio.length === 0) {
@@ -763,43 +763,43 @@
 
         var ageSalesVolumeRatioDOM = document.getElementById("ageSalesVolumeRatioChart");
         var ageSalesVolumeRatioChart = new Chart(ageSalesVolumeRatioDOM, {
-          type: 'pie',
-          data: {
-            labels: ageSalesVolumeRatioIndex,
-            datasets: [{
-              data: ageSalesVolumeRatio,
-              backgroundColor: ["#36b9cc", "#e74a3b", "#f6c23e", "#4e73df", "#1cc88a", "#5a5c69"],
-              hoverBackgroundColor: "#858796",
-              hoverBorderColor: "rgba(234, 236, 244, 1)",
-            }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            tooltips: {
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, data) {
-                    const value = data['datasets'][0]['data'][tooltipItem['index']]
-                    const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
-                        return sum + currValue;
-                    }, 0);
-                    return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "원, " + Math.round((value/sum)*100) + "%";
-                }
-              }
+            type: 'pie',
+            data: {
+                labels: ageSalesVolumeRatioIndex,
+                datasets: [{
+                    data: ageSalesVolumeRatio,
+                    backgroundColor: ["#36b9cc", "#e74a3b", "#f6c23e", "#4e73df", "#1cc88a", "#5a5c69"],
+                    hoverBackgroundColor: "#858796",
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
             },
-            legend: {
-              display: true
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            const value = data['datasets'][0]['data'][tooltipItem['index']]
+                            const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
+                                return sum + currValue;
+                            }, 0);
+                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "원, " + Math.round((value/sum)*100) + "%";
+                        }
+                    }
+                },
+                legend: {
+                    display: true
+                },
+                cutoutPercentage: 80,
             },
-            cutoutPercentage: 80,
-          },
         });
 
         if (ageSalesVolumeRatio.length === 0) {
@@ -814,43 +814,43 @@
 
         var franchiseRatioDOM = document.getElementById("franchiseRatioChart");
         var franchiseRatioChart = new Chart(franchiseRatioDOM, {
-          type: 'pie',
-          data: {
-            labels: franchiseRatioIndex,
-            datasets: [{
-              data: franchiseRatio,
-              backgroundColor: ["#36b9cc", "#e74a3b"],
-              hoverBackgroundColor: "#858796",
-              hoverBorderColor: "rgba(234, 236, 244, 1)",
-            }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            tooltips: {
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, data) {
-                    const value = data['datasets'][0]['data'][tooltipItem['index']]
-                    const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
-                        return sum + currValue;
-                    }, 0);
-                    return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "개, " + Math.round((value/sum)*100) + "%";
-                }
-              }
+            type: 'pie',
+            data: {
+                labels: franchiseRatioIndex,
+                datasets: [{
+                    data: franchiseRatio,
+                    backgroundColor: ["#36b9cc", "#e74a3b"],
+                    hoverBackgroundColor: "#858796",
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
             },
-            legend: {
-              display: true
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            const value = data['datasets'][0]['data'][tooltipItem['index']]
+                            const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
+                                return sum + currValue;
+                            }, 0);
+                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "개, " + Math.round((value/sum)*100) + "%";
+                        }
+                    }
+                },
+                legend: {
+                    display: true
+                },
+                cutoutPercentage: 80,
             },
-            cutoutPercentage: 80,
-          },
         });
 
         if (franchiseRatio.length === 0) {
@@ -865,49 +865,49 @@
 
         var categoryDensityDOM = document.getElementById("categoryDensityChart");
         var categoryDensityChart = new Chart(categoryDensityDOM, {
-          type: 'pie',
-          data: {
-            labels: categoryDensityIndex,
-            datasets: [{
-              data: categoryDensity,
-              //backgroundColor: ["#36b9cc", "#e74a3b", "#f6c23e", "#4e73df", "#1cc88a", "#5a5c69"],
-              backgroundColor: function(context) {
-                    var index = context.dataIndex;
-                    if (category == categoryDensityIndex[index]) {
-                        return '#36b9cc';
+            type: 'pie',
+            data: {
+                labels: categoryDensityIndex,
+                datasets: [{
+                    data: categoryDensity,
+                    //backgroundColor: ["#36b9cc", "#e74a3b", "#f6c23e", "#4e73df", "#1cc88a", "#5a5c69"],
+                    backgroundColor: function(context) {
+                        var index = context.dataIndex;
+                        if (category == categoryDensityIndex[index]) {
+                            return '#36b9cc';
+                        }
+                    },
+                    hoverBackgroundColor: "#858796",
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            const value = data['datasets'][0]['data'][tooltipItem['index']]
+                            const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
+                                return sum + currValue;
+                            }, 0);
+                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "개, " + Math.round((value/sum)*100) + "%";
+                        }
                     }
                 },
-              hoverBackgroundColor: "#858796",
-              hoverBorderColor: "rgba(234, 236, 244, 1)",
-            }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            tooltips: {
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, data) {
-                    const value = data['datasets'][0]['data'][tooltipItem['index']]
-                    const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
-                        return sum + currValue;
-                    }, 0);
-                    return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "개, " + Math.round((value/sum)*100) + "%";
-                }
-              }
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
             },
-            legend: {
-              display: false
-            },
-            cutoutPercentage: 80,
-          },
         });
 
         if (categoryDensity.length === 0) {
@@ -926,92 +926,92 @@
 
         var floatingPopDOM = document.getElementById("floatingPopulation");
         var floatingPopChart = new Chart(floatingPopDOM, {
-          type: 'bar',
-          plugins: [{
-            beforeUpdate: function(chartInstance) {
-            chartInstance.data.datasets.forEach(function(dataset) {
-                dataset.backgroundColor = dataset.data.map(function(data) {
-              return data < 0 ? "#e74a3b" : "#4e73df";
-              })
-            })
-            }
-          }],
-          data: {
-            labels: floatingPopIndex,
-            datasets: [{
-              label: "유동인구",
-              backgroundColor: "#4e73df",
-              hoverBackgroundColor: "#858796",
-              borderColor: "#4e73df",
-              data: floatingPopulation,
+            type: 'bar',
+            plugins: [{
+                beforeUpdate: function(chartInstance) {
+                    chartInstance.data.datasets.forEach(function(dataset) {
+                        dataset.backgroundColor = dataset.data.map(function(data) {
+                            return data < 0 ? "#e74a3b" : "#4e73df";
+                        })
+                    })
+                }
             }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            layout: {
-              padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-              }
+            data: {
+                labels: floatingPopIndex,
+                datasets: [{
+                    label: "유동인구",
+                    backgroundColor: "#4e73df",
+                    hoverBackgroundColor: "#858796",
+                    borderColor: "#4e73df",
+                    data: floatingPopulation,
+                }],
             },
-            scales: {
-              xAxes: [{
-                time: {
-                  unit: 'quarter'
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
                 },
-                gridLines: {
-                  display: false,
-                  drawBorder: false
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'quarter'
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 0,
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [5],
+                            zeroLineWidth: 5,
+                        }
+                    }],
                 },
-                maxBarThickness: 25,
-              }],
-              yAxes: [{
-                ticks: {
-                  suggestedMin: 0,
-                  suggestedMax: 0,
-                  maxTicksLimit: 5,
-                  padding: 10,
-                  // Include a dollar sign in the ticks
-                  callback: function(value, index, values) {
-                    return number_format(value);
-                  }
+                legend: {
+                    display: false
                 },
-                gridLines: {
-                  color: "rgb(234, 236, 244)",
-                  zeroLineColor: "rgb(234, 236, 244)",
-                  drawBorder: false,
-                  borderDash: [2],
-                  zeroLineBorderDash: [5],
-                  zeroLineWidth: 5,
-                }
-              }],
-            },
-            legend: {
-              display: false
-            },
-            tooltips: {
-              titleMarginBottom: 10,
-              titleFontColor: '#6e707e',
-              titleFontSize: 18,
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, chart) {
-                  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                  return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '명';
-                }
-              }
-            },
-          }
+                tooltips: {
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 18,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '명';
+                        }
+                    }
+                },
+            }
         });
 
         //연령대별 유동인구
@@ -1021,92 +1021,92 @@
 
         var ageGroupPopDOM = document.getElementById("ageGroupPopulation");
         var ageGroupPopChart = new Chart(ageGroupPopDOM, {
-          type: 'bar',
-          plugins: [{
-            beforeUpdate: function(chartInstance) {
-            chartInstance.data.datasets.forEach(function(dataset) {
-                dataset.backgroundColor = dataset.data.map(function(data) {
-              return data < 0 ? "#e74a3b" : "#4e73df";
-              })
-            })
-            }
-          }],
-          data: {
-            labels: ageGroupPopIndex,
-            datasets: [{
-              label: "유동인구",
-              backgroundColor: "#4e73df",
-              hoverBackgroundColor: "#858796",
-              borderColor: "#4e73df",
-              data: ageGroupPopulation,
+            type: 'bar',
+            plugins: [{
+                beforeUpdate: function(chartInstance) {
+                    chartInstance.data.datasets.forEach(function(dataset) {
+                        dataset.backgroundColor = dataset.data.map(function(data) {
+                            return data < 0 ? "#e74a3b" : "#4e73df";
+                        })
+                    })
+                }
             }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            layout: {
-              padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-              }
+            data: {
+                labels: ageGroupPopIndex,
+                datasets: [{
+                    label: "유동인구",
+                    backgroundColor: "#4e73df",
+                    hoverBackgroundColor: "#858796",
+                    borderColor: "#4e73df",
+                    data: ageGroupPopulation,
+                }],
             },
-            scales: {
-              xAxes: [{
-                time: {
-                  unit: 'quarter'
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
                 },
-                gridLines: {
-                  display: false,
-                  drawBorder: false
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'quarter'
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 0,
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [5],
+                            zeroLineWidth: 5,
+                        }
+                    }],
                 },
-                maxBarThickness: 25,
-              }],
-              yAxes: [{
-                ticks: {
-                  suggestedMin: 0,
-                  suggestedMax: 0,
-                  maxTicksLimit: 5,
-                  padding: 10,
-                  // Include a dollar sign in the ticks
-                  callback: function(value, index, values) {
-                    return number_format(value);
-                  }
+                legend: {
+                    display: false
                 },
-                gridLines: {
-                  color: "rgb(234, 236, 244)",
-                  zeroLineColor: "rgb(234, 236, 244)",
-                  drawBorder: false,
-                  borderDash: [2],
-                  zeroLineBorderDash: [5],
-                  zeroLineWidth: 5,
-                }
-              }],
-            },
-            legend: {
-              display: false
-            },
-            tooltips: {
-              titleMarginBottom: 10,
-              titleFontColor: '#6e707e',
-              titleFontSize: 18,
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, chart) {
-                  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                  return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '명';
-                }
-              }
-            },
-          }
+                tooltips: {
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 18,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '명';
+                        }
+                    }
+                },
+            }
         });
 
         // 시간대별 유동인구
@@ -1116,90 +1116,90 @@
 
         var timePopDOM = document.getElementById("timePopulation");
         var timePopChart = new Chart(timePopDOM, {
-          type: 'line',
-          data: {
-            labels: timePopIndex,
-            datasets: [{
-              label: district,
-              lineTension: 0.3,
-              backgroundColor: "rgba(78, 115, 223, 0.05)",
-              borderColor: "rgba(78, 115, 223, 1)",
-              pointRadius: 3,
-              pointBackgroundColor: "rgba(78, 115, 223, 1)",
-              pointBorderColor: "rgba(78, 115, 223, 1)",
-              pointHoverRadius: 3,
-              pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-              pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-              pointHitRadius: 10,
-              pointBorderWidth: 2,
-              data: timePopulation,
-            }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            layout: {
-              padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-              }
+            type: 'line',
+            data: {
+                labels: timePopIndex,
+                datasets: [{
+                    label: district,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(78, 115, 223, 1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHoverRadius: 3,
+                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2,
+                    data: timePopulation,
+                }],
             },
-            scales: {
-              xAxes: [{
-                time: {
-                  unit: 'date'
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
                 },
-                gridLines: {
-                  display: false,
-                  drawBorder: false
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'date'
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 0,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [2]
+                        }
+                    }],
                 },
-              }],
-              yAxes: [{
-                ticks: {
-                  suggestedMin: 0,
-                  suggestedMax: 0,
-                  padding: 10,
-                  // Include a dollar sign in the ticks
-                  callback: function(value, index, values) {
-                    return number_format(value);
-                  }
+                legend: {
+                    display: false
                 },
-                gridLines: {
-                  color: "rgb(234, 236, 244)",
-                  zeroLineColor: "rgb(234, 236, 244)",
-                  drawBorder: false,
-                  borderDash: [2],
-                  zeroLineBorderDash: [2]
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 18,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    intersect: false,
+                    mode: 'index',
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '명';
+                        }
+                    }
                 }
-              }],
-            },
-            legend: {
-              display: false
-            },
-            tooltips: {
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              titleMarginBottom: 10,
-              titleFontColor: '#6e707e',
-              titleFontSize: 18,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              intersect: false,
-              mode: 'index',
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, chart) {
-                  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                  return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '명';
-                }
-              }
             }
-          }
         });
 
         // 시간대별 매출 규모
@@ -1209,89 +1209,89 @@
 
         var timeSalesVolumeDOM = document.getElementById("timeSalesVolume");
         var timeSalesVolumeChart = new Chart(timeSalesVolumeDOM, {
-          type: 'line',
-          data: {
-            labels: timeSalesVolumeIndex,
-            datasets: [{
-              label: district,
-              lineTension: 0.3,
-              backgroundColor: "rgba(78, 115, 223, 0.05)",
-              borderColor: "rgba(78, 115, 223, 1)",
-              pointRadius: 3,
-              pointBackgroundColor: "rgba(78, 115, 223, 1)",
-              pointBorderColor: "rgba(78, 115, 223, 1)",
-              pointHoverRadius: 3,
-              pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-              pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-              pointHitRadius: 10,
-              pointBorderWidth: 2,
-              data: timeSalesVolume,
-            }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            layout: {
-              padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-              }
+            type: 'line',
+            data: {
+                labels: timeSalesVolumeIndex,
+                datasets: [{
+                    label: district,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(78, 115, 223, 1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHoverRadius: 3,
+                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2,
+                    data: timeSalesVolume,
+                }],
             },
-            scales: {
-              xAxes: [{
-                time: {
-                  unit: 'date'
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
                 },
-                gridLines: {
-                  display: false,
-                  drawBorder: false
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'date'
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 0,
+                            padding: 10,
+                            callback: function(value, index, values) {
+                                return number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [2]
+                        }
+                    }],
                 },
-              }],
-              yAxes: [{
-                ticks: {
-                  suggestedMin: 0,
-                  suggestedMax: 0,
-                  padding: 10,
-                  callback: function(value, index, values) {
-                    return number_format(value);
-                  }
+                legend: {
+                    display: false
                 },
-                gridLines: {
-                  color: "rgb(234, 236, 244)",
-                  zeroLineColor: "rgb(234, 236, 244)",
-                  drawBorder: false,
-                  borderDash: [2],
-                  zeroLineBorderDash: [2]
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 18,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    intersect: false,
+                    mode: 'index',
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '원';
+                        }
+                    }
                 }
-              }],
-            },
-            legend: {
-              display: false
-            },
-            tooltips: {
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              titleMarginBottom: 10,
-              titleFontColor: '#6e707e',
-              titleFontSize: 18,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              intersect: false,
-              mode: 'index',
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, chart) {
-                  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                  return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '원';
-                }
-              }
             }
-          }
         });
 
         if (timeSalesVolume.length === 0) {
@@ -1310,92 +1310,92 @@
 
         var quarterSalesVolumeDOM = document.getElementById("quarterSalesVolume");
         var quarterSalesVolumeChart = new Chart(quarterSalesVolumeDOM, {
-          type: 'bar',
-          plugins: [{
-            beforeUpdate: function(chartInstance) {
-            chartInstance.data.datasets.forEach(function(dataset) {
-                dataset.backgroundColor = dataset.data.map(function(data) {
-              return data < 0 ? "#e74a3b" : "#4e73df";
-              })
-            })
-            }
-          }],
-          data: {
-            labels: quarterSalesVolumeIndex,
-            datasets: [{
-              label: "매출 규모",
-              backgroundColor: "#4e73df",
-              hoverBackgroundColor: "#858796",
-              borderColor: "#4e73df",
-              data: quarterSalesVolume,
+            type: 'bar',
+            plugins: [{
+                beforeUpdate: function(chartInstance) {
+                    chartInstance.data.datasets.forEach(function(dataset) {
+                        dataset.backgroundColor = dataset.data.map(function(data) {
+                            return data < 0 ? "#e74a3b" : "#4e73df";
+                        })
+                    })
+                }
             }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            layout: {
-              padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-              }
+            data: {
+                labels: quarterSalesVolumeIndex,
+                datasets: [{
+                    label: "매출 규모",
+                    backgroundColor: "#4e73df",
+                    hoverBackgroundColor: "#858796",
+                    borderColor: "#4e73df",
+                    data: quarterSalesVolume,
+                }],
             },
-            scales: {
-              xAxes: [{
-                time: {
-                  unit: 'quarter'
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
                 },
-                gridLines: {
-                  display: false,
-                  drawBorder: false
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'quarter'
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 0,
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [5],
+                            zeroLineWidth: 5,
+                        }
+                    }],
                 },
-                maxBarThickness: 25,
-              }],
-              yAxes: [{
-                ticks: {
-                  suggestedMin: 0,
-                  suggestedMax: 0,
-                  maxTicksLimit: 5,
-                  padding: 10,
-                  // Include a dollar sign in the ticks
-                  callback: function(value, index, values) {
-                    return number_format(value);
-                  }
+                legend: {
+                    display: false
                 },
-                gridLines: {
-                  color: "rgb(234, 236, 244)",
-                  zeroLineColor: "rgb(234, 236, 244)",
-                  drawBorder: false,
-                  borderDash: [2],
-                  zeroLineBorderDash: [5],
-                  zeroLineWidth: 5,
-                }
-              }],
-            },
-            legend: {
-              display: false
-            },
-            tooltips: {
-              titleMarginBottom: 10,
-              titleFontColor: '#6e707e',
-              titleFontSize: 18,
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, chart) {
-                  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                  return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '원';
-                }
-              }
-            },
-          }
+                tooltips: {
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 18,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '원';
+                        }
+                    }
+                },
+            }
         });
 
         if (quarterSalesVolume.length === 0) {
@@ -1412,92 +1412,92 @@
 
         var marketAvgSalesVolumeDOM = document.getElementById("marketAvgSalesVolume");
         var marketAvgSalesVolumeChart = new Chart(marketAvgSalesVolumeDOM, {
-          type: 'bar',
-          plugins: [{
-            beforeUpdate: function(chartInstance) {
-            chartInstance.data.datasets.forEach(function(dataset) {
-                dataset.backgroundColor = dataset.data.map(function(data) {
-              return data < 0 ? "#e74a3b" : "#4e73df";
-              })
-            })
-            }
-          }],
-          data: {
-            labels: marketAvgSalesVolumeIndex,
-            datasets: [{
-              label: "평균 매출",
-              backgroundColor: "#4e73df",
-              hoverBackgroundColor: "#858796",
-              borderColor: "#4e73df",
-              data: marketAvgSalesVolume,
+            type: 'bar',
+            plugins: [{
+                beforeUpdate: function(chartInstance) {
+                    chartInstance.data.datasets.forEach(function(dataset) {
+                        dataset.backgroundColor = dataset.data.map(function(data) {
+                            return data < 0 ? "#e74a3b" : "#4e73df";
+                        })
+                    })
+                }
             }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            layout: {
-              padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-              }
+            data: {
+                labels: marketAvgSalesVolumeIndex,
+                datasets: [{
+                    label: "평균 매출",
+                    backgroundColor: "#4e73df",
+                    hoverBackgroundColor: "#858796",
+                    borderColor: "#4e73df",
+                    data: marketAvgSalesVolume,
+                }],
             },
-            scales: {
-              xAxes: [{
-                time: {
-                  unit: 'quarter'
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
                 },
-                gridLines: {
-                  display: false,
-                  drawBorder: false
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'quarter'
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 0,
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [5],
+                            zeroLineWidth: 5,
+                        }
+                    }],
                 },
-                maxBarThickness: 25,
-              }],
-              yAxes: [{
-                ticks: {
-                  suggestedMin: 0,
-                  suggestedMax: 0,
-                  maxTicksLimit: 5,
-                  padding: 10,
-                  // Include a dollar sign in the ticks
-                  callback: function(value, index, values) {
-                    return number_format(value);
-                  }
+                legend: {
+                    display: false
                 },
-                gridLines: {
-                  color: "rgb(234, 236, 244)",
-                  zeroLineColor: "rgb(234, 236, 244)",
-                  drawBorder: false,
-                  borderDash: [2],
-                  zeroLineBorderDash: [5],
-                  zeroLineWidth: 5,
-                }
-              }],
-            },
-            legend: {
-              display: false
-            },
-            tooltips: {
-              titleMarginBottom: 10,
-              titleFontColor: '#6e707e',
-              titleFontSize: 18,
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, chart) {
-                  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                  return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '원';
-                }
-              }
-            },
-          }
+                tooltips: {
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 18,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '원';
+                        }
+                    }
+                },
+            }
         });
 
         if (marketAvgSalesVolume.length === 0) {

@@ -1,124 +1,124 @@
 {% extends "base.html" %}
 {% block content %}
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- 비교할 지역 선택 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary">비교할 지역 선택</h3>
-                                    <div class="input-group dropdown">
-                                        <select id="cprGu" class="form-select mr-2" aria-label="cprGu" name="cprGu">
-                                            {% if gu == "" %}
-                                            <option selected disabled>구 선택</option>
-                                            {% else %}
-                                            <option selected>{{ gu }}</option>
-                                            {% endif %}
-                                            {% for gu in guList %}
-                                            <option>{{ gu }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <select id="cprDong" class="form-select" aria-label="cprDong" name="cprDong">
-                                            <option selected disabled>동 선택</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 비교할 지역, 업종 선택 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary">비교할 지역, 업종 선택</h3>
-                                    <div class="input-group dropdown">
-                                        <select id="cprSalesGu" class="form-select mr-2" aria-label="cprSalesGu" name="cprSalesGu">
-                                            {% if gu == "" %}
-                                            <option selected disabled>구 선택</option>
-                                            {% else %}
-                                            <option selected>{{ gu }}</option>
-                                            {% endif %}
-                                            {% for gu in guList %}
-                                            <option>{{ gu }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <select id="cprSalesDong" class="form-select mr-2" aria-label="cprSalesDong" name="cprSalesDong">
-                                            <option selected disabled>동 선택</option>
-                                        </select>
-                                        <select id="cprSalesCat" class="form-select" aria-label="cprSalesCat" name="cprSalesCat">
-                                            <option selected disabled>업종 선택</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!-- 항목 비교 스캐터 플롯 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary" id="scatterTitle">Scatter plot</h3>
-                                    <div class="input-group dropdown">
-                                        <select id="cprColSelect1" class="form-select mr-2" aria-label="cprColSelect1" name="cprColSelect1">
-                                            <option selected disabled>항목 1 선택</option>
-                                        </select>
-                                        <select id="cprColSelect2" class="form-select" aria-label="cprColSelect2" name="cprColSelect2">
-                                            <option selected disabled>항목 2 선택</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area" style="position: relative; height:40vh">
-                                        <canvas id="cprSctPlot"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 항목, 업종 비교 스캐터 플롯 -->
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h3 class="m-0 font-weight-bold text-primary" id="scatterSalesTitle">Scatter plot</h3>
-                                    <div class="input-group dropdown">
-                                        <select id="cprSalesSelect1" class="form-select mr-2" aria-label="cprSalesSelect1" name="cprSalesSelect1">
-                                            <option selected disabled>항목 선택</option>
-                                        </select>
-                                        <select id="cprSalesSelect2" class="form-select" aria-label="cprSalesSelect2" name="cprSalesSelect2">
-                                            <option selected disabled>매출 선택</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area" style="position: relative; height:40vh">
-                                        <canvas id="cprSalesSctPlot"></canvas>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 비교할 지역 선택 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary">비교할 지역 선택</h3>
+                        <div class="input-group dropdown">
+                            <select id="cprGu" class="form-select mr-2" aria-label="cprGu" name="cprGu">
+                                {% if gu == "" %}
+                                    <option selected disabled>구 선택</option>
+                                {% else %}
+                                    <option selected>{{ gu }}</option>
+                                {% endif %}
+                                {% for gu in guList %}
+                                    <option>{{ gu }}</option>
+                                {% endfor %}
+                            </select>
+                            <select id="cprDong" class="form-select" aria-label="cprDong" name="cprDong">
+                                <option selected disabled>동 선택</option>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Modal -->
-            <div class="modal fade" id="noDataModal" tabindex="-1" aria-labelledby="noDataModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
+            <!-- 비교할 지역, 업종 선택 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary">비교할 지역, 업종 선택</h3>
+                        <div class="input-group dropdown">
+                            <select id="cprSalesGu" class="form-select mr-2" aria-label="cprSalesGu" name="cprSalesGu">
+                                {% if gu == "" %}
+                                    <option selected disabled>구 선택</option>
+                                {% else %}
+                                    <option selected>{{ gu }}</option>
+                                {% endif %}
+                                {% for gu in guList %}
+                                    <option>{{ gu }}</option>
+                                {% endfor %}
+                            </select>
+                            <select id="cprSalesDong" class="form-select mr-2" aria-label="cprSalesDong" name="cprSalesDong">
+                                <option selected disabled>동 선택</option>
+                            </select>
+                            <select id="cprSalesCat" class="form-select" aria-label="cprSalesCat" name="cprSalesCat">
+                                <option selected disabled>업종 선택</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- 항목 비교 스캐터 플롯 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary" id="scatterTitle">Scatter plot</h3>
+                        <div class="input-group dropdown">
+                            <select id="cprColSelect1" class="form-select mr-2" aria-label="cprColSelect1" name="cprColSelect1">
+                                <option selected disabled>항목 1 선택</option>
+                            </select>
+                            <select id="cprColSelect2" class="form-select" aria-label="cprColSelect2" name="cprColSelect2">
+                                <option selected disabled>항목 2 선택</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-area" style="position: relative; height:40vh">
+                            <canvas id="cprSctPlot"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 항목, 업종 비교 스캐터 플롯 -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h3 class="m-0 font-weight-bold text-primary" id="scatterSalesTitle">Scatter plot</h3>
+                        <div class="input-group dropdown">
+                            <select id="cprSalesSelect1" class="form-select mr-2" aria-label="cprSalesSelect1" name="cprSalesSelect1">
+                                <option selected disabled>항목 선택</option>
+                            </select>
+                            <select id="cprSalesSelect2" class="form-select" aria-label="cprSalesSelect2" name="cprSalesSelect2">
+                                <option selected disabled>매출 선택</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-area" style="position: relative; height:40vh">
+                            <canvas id="cprSalesSctPlot"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="noDataModal" tabindex="-1" aria-labelledby="noDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h1 class="modal-title h3 mb-0 text-gray-800" id="noDataModalLabel">NO DATA</h1>
-                  </div>
-                  <div class="modal-body">
-                    <p>선택한 데이터가 존재하지 않습니다!</p>
-                  </div>
                 </div>
-              </div>
+                <div class="modal-body">
+                    <p>선택한 데이터가 존재하지 않습니다!</p>
+                </div>
             </div>
-            <!-- End of Main Content -->
+        </div>
+    </div>
+    <!-- End of Main Content -->
 
     <script type="text/javascript">
         //차트 업데이트 함수
@@ -153,87 +153,87 @@
 
         var cprSctPlotDOM = document.getElementById("cprSctPlot");
         var cprSctPlotChart = new Chart(cprSctPlotDOM, {
-          type: 'scatter',
-          data: {
-            labels: [],
-            datasets: [{
-              label: "ddd",
-              lineTension: 0.3,
-              backgroundColor: "rgba(78, 115, 223, 0.05)",
-              borderColor: "rgba(78, 115, 223, 1)",
-              pointRadius: 3,
-              pointBackgroundColor: "rgba(78, 115, 223, 1)",
-              pointBorderColor: "rgba(78, 115, 223, 1)",
-              pointHoverRadius: 3,
-              pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-              pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-              pointHitRadius: 10,
-              pointBorderWidth: 2,
-              data: cprSctPlotData,
-            }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            layout: {
-              padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-              }
-            },
-            legend: {
-              display: false
-            },
-            scales: {
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: $('#cprColSelect1 option:selected').text()
-                    },
-                    ticks: {
-                        //suggestedMin: -100,
-                        //suggestedMax: 100,
-                        min: -200,
-                        max: 200,
-                    }
+            type: 'scatter',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: "ddd",
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(78, 115, 223, 1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHoverRadius: 3,
+                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2,
+                    data: cprSctPlotData,
                 }],
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: $('#cprColSelect2 option:selected').text()
-                    },
-                    ticks: {
-                        //suggestedMin: -100,
-                        //suggestedMax: 100,
-                        min: -200,
-                        max: 200,
-                    }
-                }]
             },
-            tooltips: {
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              titleMarginBottom: 10,
-              titleFontColor: '#6e707e',
-              titleFontSize: 18,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              intersect: false,
-              mode: 'index',
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, chart) {
-                  var datasetLabel = chart.labels[tooltipItem.index] || '';
-                  return datasetLabel;
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: $('#cprColSelect1 option:selected').text()
+                        },
+                        ticks: {
+                            //suggestedMin: -100,
+                            //suggestedMax: 100,
+                            min: -200,
+                            max: 200,
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: $('#cprColSelect2 option:selected').text()
+                        },
+                        ticks: {
+                            //suggestedMin: -100,
+                            //suggestedMax: 100,
+                            min: -200,
+                            max: 200,
+                        }
+                    }]
+                },
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 18,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    intersect: false,
+                    mode: 'index',
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.labels[tooltipItem.index] || '';
+                            return datasetLabel;
+                        }
+                    }
                 }
-              }
             }
-          }
         });
 
         var cprSalesSctPlotJson = eval({{ categoriesMeanStdJson|safe }});
@@ -241,87 +241,87 @@
 
         var cprSalesSctPlotDOM = document.getElementById("cprSalesSctPlot");
         var cprSalesSctPlotChart = new Chart(cprSalesSctPlotDOM, {
-          type: 'scatter',
-          data: {
-            labels: [],
-            datasets: [{
-              label: "ddd",
-              lineTension: 0.3,
-              backgroundColor: "rgba(78, 115, 223, 0.05)",
-              borderColor: "rgba(78, 115, 223, 1)",
-              pointRadius: 3,
-              pointBackgroundColor: "rgba(78, 115, 223, 1)",
-              pointBorderColor: "rgba(78, 115, 223, 1)",
-              pointHoverRadius: 3,
-              pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-              pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-              pointHitRadius: 10,
-              pointBorderWidth: 2,
-              data: cprSctPlotData,
-            }],
-          },
-          options: {
-            maintainAspectRatio: false,
-            layout: {
-              padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-              }
-            },
-            legend: {
-              display: false
-            },
-            scales: {
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: $('#cprSalesSelect1 option:selected').text()
-                    },
-                    ticks: {
-                        //suggestedMin: -100,
-                        //suggestedMax: 100,
-                        min: -200,
-                        max: 200,
-                    }
+            type: 'scatter',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: "ddd",
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(78, 115, 223, 1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHoverRadius: 3,
+                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2,
+                    data: cprSctPlotData,
                 }],
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: $('#cprSalesSelect2 option:selected').text()
-                    },
-                    ticks: {
-                        //suggestedMin: -100,
-                        //suggestedMax: 100,
-                        min: -200,
-                        max: 200,
-                    }
-                }]
             },
-            tooltips: {
-              backgroundColor: "rgb(255,255,255)",
-              bodyFontColor: "#858796",
-              bodyFontSize: 16,
-              titleMarginBottom: 10,
-              titleFontColor: '#6e707e',
-              titleFontSize: 18,
-              borderColor: '#dddfeb',
-              borderWidth: 1,
-              xPadding: 15,
-              yPadding: 15,
-              displayColors: false,
-              intersect: false,
-              mode: 'index',
-              caretPadding: 10,
-              callbacks: {
-                label: function(tooltipItem, chart) {
-                  var datasetLabel = chart.labels[tooltipItem.index] || '';
-                  return datasetLabel;
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: $('#cprSalesSelect1 option:selected').text()
+                        },
+                        ticks: {
+                            //suggestedMin: -100,
+                            //suggestedMax: 100,
+                            min: -200,
+                            max: 200,
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: $('#cprSalesSelect2 option:selected').text()
+                        },
+                        ticks: {
+                            //suggestedMin: -100,
+                            //suggestedMax: 100,
+                            min: -200,
+                            max: 200,
+                        }
+                    }]
+                },
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    bodyFontSize: 16,
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 18,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    intersect: false,
+                    mode: 'index',
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.labels[tooltipItem.index] || '';
+                            return datasetLabel;
+                        }
+                    }
                 }
-              }
             }
-          }
         });
 
         $(function() {
@@ -402,9 +402,9 @@
                     method: "GET",
                     dataType: "script"
                 })
-                .done(function(script) {
-                    $('#cprDong').empty().populateDisabled(['동 선택']).populate(eval(script));
-                });
+                    .done(function(script) {
+                        $('#cprDong').empty().populateDisabled(['동 선택']).populate(eval(script));
+                    });
             });
 
             $('#cprDong').on('change', function() {
@@ -417,16 +417,16 @@
                         method: "GET",
                         dataType: "script"
                     })
-                    .done(function(script) {
-                        $('#cprColSelect1').empty().populateDisabled(['항목 1 선택']).populate(eval(script)[0]);
-                        $('#cprColSelect2').empty().populateDisabled(['항목 2 선택']).populate(eval(script)[0]);
+                        .done(function(script) {
+                            $('#cprColSelect1').empty().populateDisabled(['항목 1 선택']).populate(eval(script)[0]);
+                            $('#cprColSelect2').empty().populateDisabled(['항목 2 선택']).populate(eval(script)[0]);
 
-                        $('#scatterTitle').text($('#cprDong option:selected').text());
+                            $('#scatterTitle').text($('#cprDong option:selected').text());
 
-                        removeData(cprSctPlotChart);
+                            removeData(cprSctPlotChart);
 
-                        cprSctPlotJson = JSON.parse(eval(script)[1]);
-                    });
+                            cprSctPlotJson = JSON.parse(eval(script)[1]);
+                        });
                 }
             });
 
@@ -437,9 +437,9 @@
                     method: "GET",
                     dataType: "script"
                 })
-                .done(function(script) {
-                    $('#cprSalesDong').empty().populateDisabled(['동 선택']).populate(eval(script));
-                });
+                    .done(function(script) {
+                        $('#cprSalesDong').empty().populateDisabled(['동 선택']).populate(eval(script));
+                    });
             });
 
             $('#cprSalesDong').on('change', function() {
@@ -449,9 +449,9 @@
                     method: "GET",
                     dataType: "script"
                 })
-                .done(function(script) {
-                    $('#cprSalesCat').empty().populateDisabled(['업종 선택']).populate(eval(script));
-                });
+                    .done(function(script) {
+                        $('#cprSalesCat').empty().populateDisabled(['업종 선택']).populate(eval(script));
+                    });
             });
 
             $('#cprSalesCat').on('change', function() {
@@ -466,27 +466,27 @@
                         method: "GET",
                         dataType: "script"
                     })
-                    .done(function(script) {
-                        test = eval(script);
-                        if(Object.keys(JSON.parse(test[3])).length == 2) {
+                        .done(function(script) {
+                            test = eval(script);
+                            if(Object.keys(JSON.parse(test[3])).length == 2) {
+                                removeData(cprSalesSctPlotChart);
+                                $('#cprSalesSelect1').empty().populateDisabled(['항목 선택']);
+                                $('#cprSalesSelect2').empty().populateDisabled(['업종 선택']);
+                                $('#scatterSalesTitle').text("Scatter plot");
+                                $('#noDataModal').modal();
+                                return;
+                            }
+
+                            $('#cprSalesSelect1').empty().populateDisabled(['항목 선택']).populate(eval(script)[0]);
+                            $('#cprSalesSelect2').empty().populateDisabled(['업종 선택']).populate(eval(script)[1]);
+
+                            $('#scatterSalesTitle').text($('#cprSalesCat option:selected').text());
+
                             removeData(cprSalesSctPlotChart);
-                            $('#cprSalesSelect1').empty().populateDisabled(['항목 선택']);
-                            $('#cprSalesSelect2').empty().populateDisabled(['업종 선택']);
-                            $('#scatterSalesTitle').text("Scatter plot");
-                            $('#noDataModal').modal();
-                            return;
-                        }
 
-                        $('#cprSalesSelect1').empty().populateDisabled(['항목 선택']).populate(eval(script)[0]);
-                        $('#cprSalesSelect2').empty().populateDisabled(['업종 선택']).populate(eval(script)[1]);
-
-                        $('#scatterSalesTitle').text($('#cprSalesCat option:selected').text());
-
-                        removeData(cprSalesSctPlotChart);
-
-                        cprSctPlotJson = JSON.parse(eval(script)[2]);
-                        cprSalesSctPlotJson = JSON.parse(eval(script)[3]);
-                    });
+                            cprSctPlotJson = JSON.parse(eval(script)[2]);
+                            cprSalesSctPlotJson = JSON.parse(eval(script)[3]);
+                        });
                 }
             });
         })
