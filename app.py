@@ -14,10 +14,10 @@ app.jinja_env.globals.update(
 Bootstrap(app)
 Compress(app)
 
-districtDF = pd.read_csv('./proc_sang.csv')
-categoryDF = pd.read_csv('./proc_upjong.csv')
-addr = pd.read_csv('./addr.csv')
-parking = pd.read_csv('./parking.csv')
+districtDF = pd.read_csv('assets/data/proc_sang.csv')
+categoryDF = pd.read_csv('assets/data/proc_upjong.csv')
+addr = pd.read_csv('assets/data/addr.csv')
+parking = pd.read_csv('assets/data/parking.csv')
 
 guList = list(addr['시군구명'].drop_duplicates())
 guList.sort()
@@ -30,8 +30,8 @@ district = ""
 categories = []
 category = ""
 
-guRankList = np.load('./guRank.npy', allow_pickle=True).tolist()
-seoulRankList = np.load('./seoulRank.npy', allow_pickle=True).tolist()
+guRankList = np.load('assets/data/guRank.npy', allow_pickle=True).tolist()
+seoulRankList = np.load('assets/data/seoulRank.npy', allow_pickle=True).tolist()
 
 @app.route('/')
 @app.route('/index.html')
@@ -42,6 +42,7 @@ def index():
     categories = []
     dongList = []
     districts = []
+
     return render_template('blank.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/404.html')
@@ -52,6 +53,7 @@ def notFound():
     categories = []
     dongList = []
     districts = []
+
     return render_template('404.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/getDongList')
@@ -60,6 +62,7 @@ def getDongList():
     global dongList
     dongList = list(addr[addr['시군구명'] == gu]['행정동명'].drop_duplicates())
     dongList.sort()
+
     return str(dongList)
 
 @app.route('/getDistricts')
@@ -68,6 +71,7 @@ def getDistricts():
     global districts
     districts = list(addr[addr['행정동명'] == dong]['상권_코드_명'].drop_duplicates())
     districts.sort()
+
     return str(districts)
 
 @app.route('/getCategories')
@@ -78,6 +82,7 @@ def getCategories():
     recentCategoryDF = recentCategoryDF[recentCategoryDF['분기'] == recentCategoryDF['분기'].max()]
     categories = list(recentCategoryDF['업종명'].drop_duplicates())
     categories.sort()
+
     return str(categories)
 
 @app.route('/getNearTimePopData')
@@ -86,6 +91,7 @@ def getNearTimePopData():
     districtSelected = districtDF[districtDF['상권명']==nearDistrict]
     timePopulation = districtSelected[['시간대_1_생활인구_수', '시간대_2_생활인구_수', '시간대_3_생활인구_수', \
                                        '시간대_4_생활인구_수', '시간대_5_생활인구_수', '시간대_6_생활인구_수']].values.tolist()[0]
+
     return str(timePopulation)
 
 @app.route('/getNearTimeSalesVolumeData')
@@ -98,6 +104,7 @@ def getNearTimeSalesVolumeData():
                                                  '시간대_14~17_매출_금액', '시간대_17~21_매출_금액', '시간대_21~24_매출_금액']].iloc[0])
     except:
         timeSalesVolume = []
+
     return str(timeSalesVolume)
 
 @app.route('/getCprData')
@@ -190,9 +197,9 @@ def dashboard():
         if gu == '구 선택' or gu == None or dong == '동 선택' or dong == None or district == '상권명 선택' or district == None or category == '업종명 선택' or category == None:
             return redirect(url_for('index'))
 
-    districtSelected = districtDF[districtDF['상권명']==district]
-    categorySelected = categoryDF[(categoryDF['상권명']==district) & (categoryDF['업종명']==category)]
-    recentCategoryDF = categoryDF[(categoryDF['상권명']==district) & (categoryDF['연도'] == categoryDF['연도'].max())]
+    districtSelected = districtDF[districtDF['상권명'] == district]
+    categorySelected = categoryDF[(categoryDF['상권명'] == district) & (categoryDF['업종명'] == category)]
+    recentCategoryDF = categoryDF[(categoryDF['상권명'] == district) & (categoryDF['연도'] == categoryDF['연도'].max())]
     recentCategoryDF = recentCategoryDF[recentCategoryDF['분기'] == recentCategoryDF['분기'].max()]
 
     #상권 연도별 총 유동인구
