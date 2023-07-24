@@ -43,10 +43,11 @@ def index():
     dongList = []
     districts = []
 
-    return render_template('blank.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
+    return render_template('blank.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
+                           districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/404.html')
-def notFound():
+def not_found():
     global categories
     global dongList
     global districts
@@ -54,10 +55,11 @@ def notFound():
     dongList = []
     districts = []
 
-    return render_template('404.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
+    return render_template('404.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
+                           districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/getDongList')
-def getDongList():
+def get_dong_list():
     gu = request.args.get('gu')
     global dongList
     dongList = list(addr[addr['시군구명'] == gu]['행정동명'].drop_duplicates())
@@ -66,7 +68,7 @@ def getDongList():
     return str(dongList)
 
 @app.route('/getDistricts')
-def getDistricts():
+def get_districts():
     dong = request.args.get('dong')
     global districts
     districts = list(addr[addr['행정동명'] == dong]['상권_코드_명'].drop_duplicates())
@@ -75,7 +77,7 @@ def getDistricts():
     return str(districts)
 
 @app.route('/getCategories')
-def getCategories():
+def get_categories():
     district = request.args.get('district')
     global categories
     recentCategoryDF = categoryDF[(categoryDF['상권명']==district) & (categoryDF['연도'] == categoryDF['연도'].max())]
@@ -86,21 +88,21 @@ def getCategories():
     return str(categories)
 
 @app.route('/getNearTimePopData')
-def getNearTimePopData():
+def get_near_time_pop_data():
     nearDistrict = request.args.get('nearDistrict')
     districtSelected = districtDF[districtDF['상권명']==nearDistrict]
-    timePopulation = districtSelected[['시간대_1_생활인구_수', '시간대_2_생활인구_수', '시간대_3_생활인구_수', \
+    timePopulation = districtSelected[['시간대_1_생활인구_수', '시간대_2_생활인구_수', '시간대_3_생활인구_수',
                                        '시간대_4_생활인구_수', '시간대_5_생활인구_수', '시간대_6_생활인구_수']].values.tolist()[0]
 
     return str(timePopulation)
 
 @app.route('/getNearTimeSalesVolumeData')
-def getNearTimeSalesVolumeData():
+def get_near_time_sales_volume_data():
     category = request.args.get('category')
     nearDistrict = request.args.get('nearDistrict')
     categorySelected = categoryDF[(categoryDF['상권명']==nearDistrict) & (categoryDF['업종명']==category)]
     try:
-        timeSalesVolume = list(categorySelected[['시간대_00~06_매출_금액', '시간대_06~11_매출_금액', '시간대_11~14_매출_금액', \
+        timeSalesVolume = list(categorySelected[['시간대_00~06_매출_금액', '시간대_06~11_매출_금액', '시간대_11~14_매출_금액',
                                                  '시간대_14~17_매출_금액', '시간대_17~21_매출_금액', '시간대_21~24_매출_금액']].iloc[0])
     except:
         timeSalesVolume = []
@@ -108,7 +110,7 @@ def getNearTimeSalesVolumeData():
     return str(timeSalesVolume)
 
 @app.route('/getCprData')
-def getCprData():
+def get_cpr_data():
     dong = request.args.get('dong')
     cprDistricts = list(addr[addr['행정동명']==dong]['상권_코드_명'].drop_duplicates())
     cprDistricts.sort()
@@ -123,7 +125,7 @@ def getCprData():
     return str([columns, districtsMeanStdJson])
 
 @app.route('/getCprSalesCat')
-def getCprSalesCat():
+def get_cpr_sales_cat():
     dong = request.args.get('dong')
     cprDistricts = list(addr[addr['행정동명']==dong]['상권_코드_명'].drop_duplicates())
     cprDistricts.sort()
@@ -132,7 +134,7 @@ def getCprSalesCat():
     return str(categoriesMeanCat)
 
 @app.route('/getCprSalesData')
-def getCprSalesData():
+def get_cpr_sales_data():
     dong = request.args.get('dong')
     category = request.args.get('category')
     cprDistricts = list(addr[addr['행정동명']==dong]['상권_코드_명'].drop_duplicates())
@@ -162,7 +164,7 @@ def getCprSalesData():
     return str([columns, catColumns, districtsMeanStdJson, categoriesMeanStdJson])
 
 @app.route('/map.html')
-def map():
+def map_page():
     global categories
     global dongList
     global districts
@@ -170,7 +172,8 @@ def map():
     dongList = []
     districts = []
 
-    return render_template('map.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
+    return render_template('map.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
+                           districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/compare.html')
 def compare():
@@ -181,7 +184,8 @@ def compare():
     dongList = []
     districts = []
 
-    return render_template('compare.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
+    return render_template('compare.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
+                           districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/dashboard.html', methods=['POST', 'GET'])
 def dashboard():
@@ -194,7 +198,7 @@ def dashboard():
         district = request.args.get('district')
         category = request.args.get('category')
 
-        if gu == '구 선택' or gu == None or dong == '동 선택' or dong == None or district == '상권명 선택' or district == None or category == '업종명 선택' or category == None:
+        if gu == '구 선택' or gu is None or dong == '동 선택' or dong is None or district == '상권명 선택' or district is None or category == '업종명 선택' or category is None:
             return redirect(url_for('index'))
 
     districtSelected = districtDF[districtDF['상권명'] == district]
@@ -222,18 +226,18 @@ def dashboard():
     wholeFloatingPopIndex = list(reversed(wholeFloatingPopIndex))
 
     #가장 최근 연령대별 유동인구
-    ageGroupPopulation = districtSelected[['연령대_10_생활인구_수', '연령대_20_생활인구_수', '연령대_30_생활인구_수', \
+    ageGroupPopulation = districtSelected[['연령대_10_생활인구_수', '연령대_20_생활인구_수', '연령대_30_생활인구_수',
                                            '연령대_40_생활인구_수', '연령대_50_생활인구_수', '연령대_60_이상_생활인구_수']].values.tolist()[0]
     ageGroupPopIndex = ['10대', '20대', '30대', '40대', '50대', '60대 이상']
 
     #가장 최근 시간대별 유동인구
-    timePopulation = districtSelected[['시간대_1_생활인구_수', '시간대_2_생활인구_수', '시간대_3_생활인구_수', \
+    timePopulation = districtSelected[['시간대_1_생활인구_수', '시간대_2_생활인구_수', '시간대_3_생활인구_수',
                                        '시간대_4_생활인구_수', '시간대_5_생활인구_수', '시간대_6_생활인구_수']].values.tolist()[0]
     timePopIndex = ['0~6시', '6~11시', '11~14시', '14~17시', '17~21시', '21~24시']
 
     #가장 최근 시간대별 매출 규모
     try:
-        timeSalesVolume = list(categorySelected[['시간대_00~06_매출_금액', '시간대_06~11_매출_금액', '시간대_11~14_매출_금액', \
+        timeSalesVolume = list(categorySelected[['시간대_00~06_매출_금액', '시간대_06~11_매출_금액', '시간대_11~14_매출_금액',
                                                  '시간대_14~17_매출_금액', '시간대_17~21_매출_금액', '시간대_21~24_매출_금액']].iloc[0])
         timeSalesVolumeIndex = ['0~6시', '6~11시', '11~14시', '14~17시', '17~21시', '21~24시']
     except:
@@ -380,32 +384,32 @@ def dashboard():
     guFeatures = guRankList[gu][category]['columns']
 
 
-    return render_template('dashboard.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, \
-                           districts=districts, categories=categories, \
-                           district=district, category=category, \
-                           districtCategory=district+" "+category, \
-                           floatingPopulation=floatingPopulation, floatingPopIndex=floatingPopIndex, \
-                           floatingPopChangeRatio=floatingPopChangeRatio, floatingPopChangeRatioIndex=floatingPopChangeRatioIndex, \
-                           wholeFloatingPopulation=wholeFloatingPopulation, wholeFloatingPopIndex=wholeFloatingPopIndex, \
-                           ageGroupPopulation=ageGroupPopulation, ageGroupPopIndex=ageGroupPopIndex, \
-                           timePopulation=timePopulation, timePopIndex=timePopIndex, \
-                           timeSalesVolume=timeSalesVolume, timeSalesVolumeIndex=timeSalesVolumeIndex, \
-                           quarterSalesVolume=quarterSalesVolume, quarterSalesVolumeIndex=quarterSalesVolumeIndex, \
-                           quarterSalesVolumeChangeRatio=quarterSalesVolumeChangeRatio, quarterSalesVolumeChangeRatioIndex=quarterSalesVolumeChangeRatioIndex, \
-                           wholeQuarterSalesVolume=wholeQuarterSalesVolume, wholeQuarterSalesVolumeIndex=wholeQuarterSalesVolumeIndex, \
-                           marketAvgSalesVolume=marketAvgSalesVolume, marketAvgSalesVolumeIndex=marketAvgSalesVolumeIndex, \
-                           marketAvgSalesVolumeChangeRatio=marketAvgSalesVolumeChangeRatio, marketAvgSalesVolumeChangeRatioIndex=marketAvgSalesVolumeChangeRatioIndex, \
-                           sexSalesVolumeRatio=sexSalesVolumeRatio, sexSalesVolumeRatioIndex=sexSalesVolumeRatioIndex, \
-                           ageSalesVolumeRatio=ageSalesVolumeRatio, ageSalesVolumeRatioIndex=ageSalesVolumeRatioIndex, \
-                           franchiseRatio=franchiseRatio, franchiseRatioIndex=franchiseRatioIndex, \
-                           categoryDensity=categoryDensity, categoryDensityIndex=categoryDensityIndex, \
-                           nearDistricts=nearDistricts, \
-                           countParking=countParking, countSchool=countSchool, countUniv=countUniv, countTransport=countTransport, \
-                           guRank=guRank, guRankM1=guRankM1, guRankP1=guRankP1, guRankLast=guRankLast, guRank1District=guRank1District, guRankM1District=guRankM1District, \
-                           guRankP1District=guRankP1District, guRankLastDistrict=guRankLastDistrict, guRankM1Score=guRankM1Score, guRankScore=guRankScore, guRankP1Score=guRankP1Score, \
-                           seoulRank=seoulRank, seoulRankM1=seoulRankM1, seoulRankP1=seoulRankP1, seoulRankLast=seoulRankLast, seoulRank1District=seoulRank1District, seoulRankM1District=seoulRankM1District, \
-                           seoulRankP1District=seoulRankP1District, seoulRankLastDistrict=seoulRankLastDistrict, seoulRankM1Score=seoulRankM1Score, seoulRankScore=seoulRankScore, seoulRankP1Score=seoulRankP1Score, \
-                           guFeaturesRatio=guFeaturesRatio, guFeatures=guFeatures, seoulFeaturesRatio=seoulFeaturesRatio, seoulFeatures=seoulFeatures, \
+    return render_template('dashboard.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
+                           districts=districts, categories=categories,
+                           district=district, category=category,
+                           districtCategory=district+" "+category,
+                           floatingPopulation=floatingPopulation, floatingPopIndex=floatingPopIndex,
+                           floatingPopChangeRatio=floatingPopChangeRatio, floatingPopChangeRatioIndex=floatingPopChangeRatioIndex,
+                           wholeFloatingPopulation=wholeFloatingPopulation, wholeFloatingPopIndex=wholeFloatingPopIndex,
+                           ageGroupPopulation=ageGroupPopulation, ageGroupPopIndex=ageGroupPopIndex,
+                           timePopulation=timePopulation, timePopIndex=timePopIndex,
+                           timeSalesVolume=timeSalesVolume, timeSalesVolumeIndex=timeSalesVolumeIndex,
+                           quarterSalesVolume=quarterSalesVolume, quarterSalesVolumeIndex=quarterSalesVolumeIndex,
+                           quarterSalesVolumeChangeRatio=quarterSalesVolumeChangeRatio, quarterSalesVolumeChangeRatioIndex=quarterSalesVolumeChangeRatioIndex,
+                           wholeQuarterSalesVolume=wholeQuarterSalesVolume, wholeQuarterSalesVolumeIndex=wholeQuarterSalesVolumeIndex,
+                           marketAvgSalesVolume=marketAvgSalesVolume, marketAvgSalesVolumeIndex=marketAvgSalesVolumeIndex,
+                           marketAvgSalesVolumeChangeRatio=marketAvgSalesVolumeChangeRatio, marketAvgSalesVolumeChangeRatioIndex=marketAvgSalesVolumeChangeRatioIndex,
+                           sexSalesVolumeRatio=sexSalesVolumeRatio, sexSalesVolumeRatioIndex=sexSalesVolumeRatioIndex,
+                           ageSalesVolumeRatio=ageSalesVolumeRatio, ageSalesVolumeRatioIndex=ageSalesVolumeRatioIndex,
+                           franchiseRatio=franchiseRatio, franchiseRatioIndex=franchiseRatioIndex,
+                           categoryDensity=categoryDensity, categoryDensityIndex=categoryDensityIndex,
+                           nearDistricts=nearDistricts,
+                           countParking=countParking, countSchool=countSchool, countUniv=countUniv, countTransport=countTransport,
+                           guRank=guRank, guRankM1=guRankM1, guRankP1=guRankP1, guRankLast=guRankLast, guRank1District=guRank1District, guRankM1District=guRankM1District,
+                           guRankP1District=guRankP1District, guRankLastDistrict=guRankLastDistrict, guRankM1Score=guRankM1Score, guRankScore=guRankScore, guRankP1Score=guRankP1Score,
+                           seoulRank=seoulRank, seoulRankM1=seoulRankM1, seoulRankP1=seoulRankP1, seoulRankLast=seoulRankLast, seoulRank1District=seoulRank1District, seoulRankM1District=seoulRankM1District,
+                           seoulRankP1District=seoulRankP1District, seoulRankLastDistrict=seoulRankLastDistrict, seoulRankM1Score=seoulRankM1Score, seoulRankScore=seoulRankScore, seoulRankP1Score=seoulRankP1Score,
+                           guFeaturesRatio=guFeaturesRatio, guFeatures=guFeatures, seoulFeaturesRatio=seoulFeaturesRatio, seoulFeatures=seoulFeatures,
                            seoulRankWholeDistrict=seoulRankWholeDistrict, seoulRankWholeScore=seoulRankWholeScore, guRankWholeDistrict=guRankWholeDistrict, guRankWholeScore=guRankWholeScore
                            )
 
