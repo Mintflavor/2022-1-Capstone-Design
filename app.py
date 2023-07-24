@@ -30,8 +30,8 @@ district = ""
 categories = []
 category = ""
 
-guRankList = np.load('assets/data/guRank.npy', allow_pickle=True).tolist()
-seoulRankList = np.load('assets/data/seoulRank.npy', allow_pickle=True).tolist()
+gu_rank_list = np.load('assets/data/guRank.npy', allow_pickle=True).tolist()
+seoul_rank_list = np.load('assets/data/seoulRank.npy', allow_pickle=True).tolist()
 
 @app.route('/')
 @app.route('/index.html')
@@ -43,7 +43,8 @@ def index():
     dongList = []
     districts = []
 
-    return render_template('blank.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
+    return render_template('blank.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
+                           districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/404.html')
 def not_found():
@@ -54,7 +55,8 @@ def not_found():
     dongList = []
     districts = []
 
-    return render_template('404.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
+    return render_template('404.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
+                           districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/getDongList')
 def get_dong_list():
@@ -89,8 +91,8 @@ def get_categories():
 def get_near_time_pop_data():
     near_district = request.args.get('nearDistrict')
     district_selected = districtDF[districtDF['상권명']==near_district]
-    time_population = district_selected[['시간대_1_생활인구_수', '시간대_2_생활인구_수', '시간대_3_생활인구_수', \
-                                       '시간대_4_생활인구_수', '시간대_5_생활인구_수', '시간대_6_생활인구_수']].values.tolist()[0]
+    time_population = district_selected[['시간대_1_생활인구_수', '시간대_2_생활인구_수', '시간대_3_생활인구_수',
+                                         '시간대_4_생활인구_수', '시간대_5_생활인구_수', '시간대_6_생활인구_수']].values.tolist()[0]
 
     return str(time_population)
 
@@ -100,8 +102,8 @@ def get_near_time_sales_volume_data():
     near_district = request.args.get('nearDistrict')
     category_selected = categoryDF[(categoryDF['상권명']==near_district) & (categoryDF['업종명']==category)]
     try:
-        time_sales_volume = list(category_selected[['시간대_00~06_매출_금액', '시간대_06~11_매출_금액', '시간대_11~14_매출_금액', \
-                                                 '시간대_14~17_매출_금액', '시간대_17~21_매출_금액', '시간대_21~24_매출_금액']].iloc[0])
+        time_sales_volume = list(category_selected[['시간대_00~06_매출_금액', '시간대_06~11_매출_금액', '시간대_11~14_매출_금액',
+                                                    '시간대_14~17_매출_금액', '시간대_17~21_매출_금액', '시간대_21~24_매출_금액']].iloc[0])
     except:
         time_sales_volume = []
 
@@ -170,7 +172,8 @@ def map_page():
     dongList = []
     districts = []
 
-    return render_template('map.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
+    return render_template('map.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
+                           districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/compare.html')
 def compare():
@@ -181,7 +184,8 @@ def compare():
     dongList = []
     districts = []
 
-    return render_template('compare.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong, districts=districts, categories=categories, district=district, category=category)
+    return render_template('compare.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
+                           districts=districts, categories=categories, district=district, category=category)
 
 @app.route('/dashboard.html', methods=['POST', 'GET'])
 def dashboard():
@@ -194,7 +198,7 @@ def dashboard():
         district = request.args.get('district')
         category = request.args.get('category')
 
-        if gu == '구 선택' or gu == None or dong == '동 선택' or dong == None or district == '상권명 선택' or district == None or category == '업종명 선택' or category == None:
+        if gu == '구 선택' or gu is None or dong == '동 선택' or dong is None or district == '상권명 선택' or district is None or category == '업종명 선택' or category is None:
             return redirect(url_for('index'))
 
     district_selected = districtDF[districtDF['상권명'] == district]
@@ -234,7 +238,7 @@ def dashboard():
     #가장 최근 시간대별 매출 규모
     try:
         time_sales_volume = list(category_selected[['시간대_00~06_매출_금액', '시간대_06~11_매출_금액', '시간대_11~14_매출_금액',
-                                                  '시간대_14~17_매출_금액', '시간대_17~21_매출_금액', '시간대_21~24_매출_금액']].iloc[0])
+                                                    '시간대_14~17_매출_금액', '시간대_17~21_매출_금액', '시간대_21~24_매출_금액']].iloc[0])
         time_sales_volume_index = ['0~6시', '6~11시', '11~14시', '14~17시', '17~21시', '21~24시']
     except:
         time_sales_volume = []
@@ -285,8 +289,8 @@ def dashboard():
 
     #연령대별 매출 비율
     try:
-        age_sales_volume_ratio = list(category_selected[['연령대_10_매출_금액', '연령대_20_매출_금액', '연령대_30_매출_금액', \
-                                                     '연령대_40_매출_금액', '연령대_50_매출_금액', '연령대_60_이상_매출_금액']].iloc[0])
+        age_sales_volume_ratio = list(category_selected[['연령대_10_매출_금액', '연령대_20_매출_금액', '연령대_30_매출_금액',
+                                                         '연령대_40_매출_금액', '연령대_50_매출_금액', '연령대_60_이상_매출_금액']].iloc[0])
         age_sales_volume_ratio_index = ['10대', '20대', '30대', '40대', '50대', '60대 이상']
     except:
         age_sales_volume_ratio = []
@@ -325,7 +329,7 @@ def dashboard():
         distance = haversine(district_coor, near_coor, unit='m')
         if (distance <= 1000) & (addr.loc[i]['상권_코드_명'] != district):
             near_districts.append((addr.loc[i]['상권_코드_명'], distance))
-    near_districts = sorted(near_districts, key=lambda nearDistricts: nearDistricts[1])[:5]
+    near_districts = sorted(near_districts, key=lambda near_districts: near_districts[1])[:5]
 
     #가장 최근 집객시설 수
     count_school = int(district_selected.iloc[0][['초등학교_수', '중학교_수', '고등학교_수']].sum())
@@ -333,51 +337,51 @@ def dashboard():
     count_transport = int(district_selected.iloc[0][['철도_역_수', '버스_터미널_수', '지하철_역_수', '버스_정거장_수']].sum())
 
     #서울 전체 상권 랭크
-    global seoulRankList
-    seoul_rank = list(seoulRankList[category].keys()).index(district)+1
-    seoul_rank_m1 = list(seoulRankList[category].keys()).index(district)
-    seoul_rank_p1 = list(seoulRankList[category].keys()).index(district)+2
-    seoul_rank_last = len(seoulRankList[category])-2
-    seoul_rank1_district = list(seoulRankList[category].keys())[0]
-    seoul_rank_m1_district = list(seoulRankList[category].keys())[seoul_rank_m1-1]
-    seoul_rank_p1_district = list(seoulRankList[category].keys())[seoul_rank_m1+1]
-    seoul_rank_last_district = list(seoulRankList[category].keys())[-3]
-    seoul_rank_whole_district = list(seoulRankList[category].keys())[:-2]
+    global seoul_rank_list
+    seoul_rank = list(seoul_rank_list[category].keys()).index(district) + 1
+    seoul_rank_m1 = list(seoul_rank_list[category].keys()).index(district)
+    seoul_rank_p1 = list(seoul_rank_list[category].keys()).index(district) + 2
+    seoul_rank_last = len(seoul_rank_list[category]) - 2
+    seoul_rank1_district = list(seoul_rank_list[category].keys())[0]
+    seoul_rank_m1_district = list(seoul_rank_list[category].keys())[seoul_rank_m1 - 1]
+    seoul_rank_p1_district = list(seoul_rank_list[category].keys())[seoul_rank_m1 + 1]
+    seoul_rank_last_district = list(seoul_rank_list[category].keys())[-3]
+    seoul_rank_whole_district = list(seoul_rank_list[category].keys())[:-2]
     try:
-        seoul_rank_m1_score = round(list(seoulRankList[category].values())[seoul_rank_m1-1][-1], 2)
+        seoul_rank_m1_score = round(list(seoul_rank_list[category].values())[seoul_rank_m1 - 1][-1], 2)
     except:
         seoul_rank_m1_score = -1
-    seoul_rank_score = round(list(seoulRankList[category].values())[seoul_rank_m1][-1], 2)
-    seoul_rank_p1_score = round(list(seoulRankList[category].values())[seoul_rank_m1+1][-1], 2)
-    seoul_rank_whole_score = [round(seoulRankList[category][d][-1], 2) for d in list(seoulRankList[category].keys())[:-2]]
+    seoul_rank_score = round(list(seoul_rank_list[category].values())[seoul_rank_m1][-1], 2)
+    seoul_rank_p1_score = round(list(seoul_rank_list[category].values())[seoul_rank_m1 + 1][-1], 2)
+    seoul_rank_whole_score = [round(seoul_rank_list[category][d][-1], 2) for d in list(seoul_rank_list[category].keys())[:-2]]
 
     #지역구 내 상권 랭크
-    global guRankList
+    global gu_rank_list
 
-    gu_rank = list(guRankList[gu][category].keys()).index(district)+1
-    gu_rank_m1 = list(guRankList[gu][category].keys()).index(district)
-    gu_rank_p1 = list(guRankList[gu][category].keys()).index(district)+2
-    gu_rank_last = len(guRankList[gu][category])-2
-    gu_rank1_district = list(guRankList[gu][category].keys())[0]
-    gu_rank_m1_district = list(guRankList[gu][category].keys())[gu_rank_m1-1]
-    gu_rank_p1_district = list(guRankList[gu][category].keys())[gu_rank_m1+1]
-    gu_rank_last_district = list(guRankList[gu][category].keys())[-3]
-    gu_rank_whole_district = list(guRankList[gu][category].keys())[:-2]
+    gu_rank = list(gu_rank_list[gu][category].keys()).index(district) + 1
+    gu_rank_m1 = list(gu_rank_list[gu][category].keys()).index(district)
+    gu_rank_p1 = list(gu_rank_list[gu][category].keys()).index(district) + 2
+    gu_rank_last = len(gu_rank_list[gu][category]) - 2
+    gu_rank1_district = list(gu_rank_list[gu][category].keys())[0]
+    gu_rank_m1_district = list(gu_rank_list[gu][category].keys())[gu_rank_m1 - 1]
+    gu_rank_p1_district = list(gu_rank_list[gu][category].keys())[gu_rank_m1 + 1]
+    gu_rank_last_district = list(gu_rank_list[gu][category].keys())[-3]
+    gu_rank_whole_district = list(gu_rank_list[gu][category].keys())[:-2]
     try:
-        gu_rank_m1_score = round(list(guRankList[gu][category].values())[gu_rank_m1-1][-1], 2)
+        gu_rank_m1_score = round(list(gu_rank_list[gu][category].values())[gu_rank_m1 - 1][-1], 2)
     except:
         gu_rank_m1_score = -1
-    gu_rank_score = round(list(guRankList[gu][category].values())[gu_rank_m1][-1], 2)
-    gu_rank_p1_score = round(list(guRankList[gu][category].values())[gu_rank_m1+1][-1], 2)
-    gu_rank_whole_score = [round(guRankList[gu][category][d][-1], 2) for d in list(guRankList[gu][category].keys())[:-2]]
+    gu_rank_score = round(list(gu_rank_list[gu][category].values())[gu_rank_m1][-1], 2)
+    gu_rank_p1_score = round(list(gu_rank_list[gu][category].values())[gu_rank_m1 + 1][-1], 2)
+    gu_rank_whole_score = [round(gu_rank_list[gu][category][d][-1], 2) for d in list(gu_rank_list[gu][category].keys())[:-2]]
 
     #서울 전체 상권 랭크 산정 기준
-    seoul_features_ratio = seoulRankList[category]['weights']
-    seoul_features = seoulRankList[category]['columns']
+    seoul_features_ratio = seoul_rank_list[category]['weights']
+    seoul_features = seoul_rank_list[category]['columns']
 
     #지역구 내 상권 랭크 산정 기준
-    gu_features_ratio = guRankList[gu][category]['weights']
-    gu_features = guRankList[gu][category]['columns']
+    gu_features_ratio = gu_rank_list[gu][category]['weights']
+    gu_features = gu_rank_list[gu][category]['columns']
 
 
     return render_template('dashboard.html', title="Capstone", guList=guList, dongList=dongList, gu=gu, dong=dong,
