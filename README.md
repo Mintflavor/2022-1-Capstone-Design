@@ -75,5 +75,14 @@ $$Score_{scaled}=\frac{Score-Score_{min}}{Score_{max}-Score_{min}}$$
 - jQuery
 - chart.js
 
+## Docker
+
+```bash
+$ docker build -t capstone .
+$ docker run -d -p 80:80 capstone
+```
+
+http://localhost
+
 ## 데모 웹페이지 링크
 - ~~[SEOUL COMMERCE PORTAL](http://ericacap.ddns.net)~~ (EXPIRED)
