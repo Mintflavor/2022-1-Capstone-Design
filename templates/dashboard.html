@@ -20,7 +20,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-lg font-weight-bold text-primary text-uppercase mb-1" style="font-size: 2rem;">
-                                    지리적 특성</div>
+                                    지리적 특성
+                                </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {% if countParking %}
                                         주변 공영주차장 <span class="text-info">{{ countParking }}개</span><br>
@@ -51,7 +52,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-lg font-weight-bold text-success text-uppercase mb-1" style="font-size: 2rem;">
-                                    긍정적 요소</div>
+                                    긍정적 요소
+                                </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {% if floatingPopChangeRatio[-1] > 0 %}
                                         유동인구 {{ floatingPopChangeRatioIndex[-1] }} 변화율 : <span class="text-primary">{{ floatingPopChangeRatio[-1] }}%</span><br>
@@ -76,7 +78,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-lg font-weight-bold text-warning text-uppercase mb-1" style="font-size: 2rem;">
-                                    부정적 요소</div>
+                                    부정적 요소
+                                </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {% if floatingPopChangeRatio[-1] < 0 %}
                                         유동인구 {{ floatingPopChangeRatioIndex[-1] }} 변화율 : <span class="text-danger">{{ floatingPopChangeRatio[-1] }}%</span><br>
@@ -103,51 +106,51 @@
                     <div class="card-header py-3">
                         <h3 class="m-0 font-weight-bold text-primary" style="float: left;">서울 전체 상권 랭크</h3>
                         <a id="seoulDistrictsRankBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
                             <span id="seoulDistrictsRankBtnText" class="text" onclick="(function(){$('#seoulDistrictsRankModal').modal();})()">기준</span>
                         </a>
                         <a id="seoulDistrictsRankExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-expand"></i>
-                                        </span>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-expand"></i>
+                            </span>
                             <span id="seoulDistrictsRankExpandBtnText" class="text" onclick="(function(){$('#seoulDistrictsRankExpandModal').modal();})()">더보기</span>
                         </a>
                     </div>
                     <div class="card-body">
                         <div class="chart-area" id="seoulDistrictsRankDIV" style="display: table;">
                             <div style="display: table-cell; vertical-align: middle;">
-                                            <span style="font-size: 20px; font-weight: bold;">
-                                                {% if seoulRankM1Score == -1 %}
-                                                    <mark><span style="background-color: yellow;">Rank 1. {{ seoulRank1District }} 100점</span></mark><br>
-                                                    Rank {{ seoulRankP1 }}. {{ seoulRankP1District }} {{ seoulRankP1Score }}점<br>
-                                                {% elif seoulRankM1Score == 100 %}
-                                                    Rank 1. {{ seoulRank1District }} 100점<br>
-                                                    <mark><span style="background-color: yellow;">Rank {{ seoulRank }}. {{ district }} {{ seoulRankScore }}점</span></mark><br>
-                                                    Rank {{ seoulRankP1 }}. {{ seoulRankP1District }} {{ seoulRankP1Score }}점<br>
-                                                {% else %}
-                                                    Rank 1. {{ seoulRank1District }} 100점<br>
-                                                {% endif %}
+                                <span style="font-size: 20px; font-weight: bold;">
+                                    {% if seoulRankM1Score == -1 %}
+                                        <mark><span style="background-color: yellow;">Rank 1. {{ seoulRank1District }} 100점</span></mark><br>
+                                        Rank {{ seoulRankP1 }}. {{ seoulRankP1District }} {{ seoulRankP1Score }}점<br>
+                                    {% elif seoulRankM1Score == 100 %}
+                                        Rank 1. {{ seoulRank1District }} 100점<br>
+                                        <mark><span style="background-color: yellow;">Rank {{ seoulRank }}. {{ district }} {{ seoulRankScore }}점</span></mark><br>
+                                        Rank {{ seoulRankP1 }}. {{ seoulRankP1District }} {{ seoulRankP1Score }}점<br>
+                                    {% else %}
+                                        Rank 1. {{ seoulRank1District }} 100점<br>
+                                    {% endif %}
+                                    . <br>
+                                    . <br>
+                                    . <br>
+                                    {% if ((seoulRankM1Score == 100) or (seoulRankM1Score == -1)): %}
+                                        Rank {{ seoulRankLast }}. {{ seoulRankLastDistrict }} 0점
+                                    {% else %}
+                                        Rank {{ seoulRankM1 }}. {{ seoulRankM1District }} {{ seoulRankM1Score }}점<br>
+                                        <mark><span style="background-color: yellow;">Rank {{ seoulRank }}. {{ district }} {{ seoulRankScore }}점</span></mark><br>
+                                        {% if seoulRankLast-guRank >= 1 %}
+                                            Rank {{ seoulRankP1 }}. {{ seoulRankP1District }} {{ seoulRankP1Score }}점<br>
+                                            {% if seoulRankLast-seoulRank >= 2 %}
                                                 . <br>
                                                 . <br>
                                                 . <br>
-                                                {% if ((seoulRankM1Score == 100) or (seoulRankM1Score == -1)): %}
-                                                    Rank {{ seoulRankLast }}. {{ seoulRankLastDistrict }} 0점
-                                                {% else %}
-                                                    Rank {{ seoulRankM1 }}. {{ seoulRankM1District }} {{ seoulRankM1Score }}점<br>
-                                                    <mark><span style="background-color: yellow;">Rank {{ seoulRank }}. {{ district }} {{ seoulRankScore }}점</span></mark><br>
-                                                    {% if seoulRankLast-guRank >= 1 %}
-                                                        Rank {{ seoulRankP1 }}. {{ seoulRankP1District }} {{ seoulRankP1Score }}점<br>
-                                                        {% if seoulRankLast-seoulRank >= 2 %}
-                                                            . <br>
-                                                            . <br>
-                                                            . <br>
-                                                            Rank {{ seoulRankLast }}. {{ seoulRankLastDistrict }} 0점
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% endif %}
-                                            </span>
+                                                Rank {{ seoulRankLast }}. {{ seoulRankLastDistrict }} 0점
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -159,51 +162,51 @@
                     <div class="card-header py-3">
                         <h3 class="m-0 font-weight-bold text-primary" style="float: left;">지역구 내 상권 랭크</h3>
                         <a id="guDistrictsRankBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
                             <span id="guDistrictsRankBtnText" class="text" onclick="(function(){$('#guDistrictsRankModal').modal();})()">기준</span>
                         </a>
                         <a id="guDistrictsRankExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-expand"></i>
-                                        </span>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-expand"></i>
+                            </span>
                             <span id="guDistrictsRankExpandBtnText" class="text" onclick="(function(){$('#guDistrictsRankExpandModal').modal();})()">더보기</span>
                         </a>
                     </div>
                     <div class="card-body">
                         <div class="chart-area" id="guDistrictsRankDIV" style="display: table;">
                             <div style="display: table-cell; vertical-align: middle;">
-                                            <span style="font-size: 20px; font-weight: bold;">
-                                                {% if guRankM1Score == -1 %}
-                                                    <mark><span style="background-color: yellow;">Rank 1. {{ guRank1District }} 100점</span></mark><br>
-                                                    Rank {{ guRankP1 }}. {{ guRankP1District }} {{ guRankP1Score }}점<br>
-                                                {% elif guRankM1Score == 100 %}
-                                                    Rank 1. {{ guRank1District }} 100점<br>
-                                                    <mark><span style="background-color: yellow;">Rank {{ guRank }}. {{ district }} {{ guRankScore }}점</span></mark><br>
-                                                    Rank {{ guRankP1 }}. {{ guRankP1District }} {{ guRankP1Score }}점<br>
-                                                {% else %}
-                                                    Rank 1. {{ guRank1District }} 100점<br>
-                                                {% endif %}
+                                <span style="font-size: 20px; font-weight: bold;">
+                                    {% if guRankM1Score == -1 %}
+                                        <mark><span style="background-color: yellow;">Rank 1. {{ guRank1District }} 100점</span></mark><br>
+                                        Rank {{ guRankP1 }}. {{ guRankP1District }} {{ guRankP1Score }}점<br>
+                                    {% elif guRankM1Score == 100 %}
+                                        Rank 1. {{ guRank1District }} 100점<br>
+                                        <mark><span style="background-color: yellow;">Rank {{ guRank }}. {{ district }} {{ guRankScore }}점</span></mark><br>
+                                        Rank {{ guRankP1 }}. {{ guRankP1District }} {{ guRankP1Score }}점<br>
+                                    {% else %}
+                                        Rank 1. {{ guRank1District }} 100점<br>
+                                    {% endif %}
+                                    . <br>
+                                    . <br>
+                                    . <br>
+                                    {% if ((guRankM1Score == 100) or (guRankM1Score == -1)): %}
+                                        Rank {{ guRankLast }}. {{ guRankLastDistrict }} 0점
+                                    {% else %}
+                                        Rank {{ guRankM1 }}. {{ guRankM1District }} {{ guRankM1Score }}점<br>
+                                        <mark><span style="background-color: yellow;">Rank {{ guRank }}. {{ district }} {{ guRankScore }}점</span></mark><br>
+                                        {% if guRankLast-guRank >= 1 %}
+                                            Rank {{ guRankP1 }}. {{ guRankP1District }} {{ guRankP1Score }}점<br>
+                                            {% if guRankLast-guRank >= 2 %}
                                                 . <br>
                                                 . <br>
                                                 . <br>
-                                                {% if ((guRankM1Score == 100) or (guRankM1Score == -1)): %}
-                                                    Rank {{ guRankLast }}. {{ guRankLastDistrict }} 0점
-                                                {% else %}
-                                                    Rank {{ guRankM1 }}. {{ guRankM1District }} {{ guRankM1Score }}점<br>
-                                                    <mark><span style="background-color: yellow;">Rank {{ guRank }}. {{ district }} {{ guRankScore }}점</span></mark><br>
-                                                    {% if guRankLast-guRank >= 1 %}
-                                                        Rank {{ guRankP1 }}. {{ guRankP1District }} {{ guRankP1Score }}점<br>
-                                                        {% if guRankLast-guRank >= 2 %}
-                                                            . <br>
-                                                            . <br>
-                                                            . <br>
-                                                            Rank {{ guRankLast }}. {{ guRankLastDistrict }} 0점
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% endif %}
-                                            </span>
+                                                Rank {{ guRankLast }}. {{ guRankLastDistrict }} 0점
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -217,8 +220,7 @@
             <!-- 상권 시간대별 유동인구 -->
             <div class="col-xl-6 col-lg-7">
                 <div class="card shadow mb-4">
-                    <div
-                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h3 class="m-0 font-weight-bold text-primary">상권 시간대별 유동인구</h3>
                         <div class="dropdown">
                             <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="timePopDropBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -284,8 +286,7 @@
             <!-- 업종 시간대별 매출금액 -->
             <div class="col-xl-6 col-lg-7">
                 <div class="card shadow mb-4">
-                    <div
-                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h3 class="m-0 font-weight-bold text-primary">업종 시간대별 매출 규모 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
                         <div class="dropdown">
                             <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="timeSalesVolumeDropBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -356,15 +357,15 @@
                     <div class="card-header py-3">
                         <h3 id="floatingPopTitle" class="m-0 font-weight-bold text-primary" style="float: left;">연도별 유동인구 변화</h3>
                         <a id="floatingPopBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exchange"></i>
-                                        </span>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-exchange"></i>
+                            </span>
                             <span id="floatingPopBtnText" class="text">변화율로 보기</span>
                         </a>
                         <a id="floatingPopExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i id="floatingPopExpandBtnIcon" class="fas fa-expand"></i>
-                                        </span>
+                            <span class="icon text-white-50">
+                                <i id="floatingPopExpandBtnIcon" class="fas fa-expand"></i>
+                            </span>
                             <span id="floatingPopExpandText" class="text">더보기</span>
                         </a>
                     </div>
@@ -382,15 +383,15 @@
                     <div class="card-header py-3">
                         <h3 id="quarterSalesVolumeTitle" class="m-0 font-weight-bold text-primary" style="float: left;">분기별 총 매출 규모 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
                         <a id="quarterSalesVolumeBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exchange"></i>
-                                        </span>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-exchange"></i>
+                            </span>
                             <span id="quarterSalesVolumeBtnText" class="text">변화율로 보기</span>
                         </a>
                         <a id="quarterSalesVolumeExpandBtn" class="btn btn-success btn-icon-split btn-sm mr-2" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i id="quarterSalesVolumeExpandBtnIcon" class="fas fa-expand"></i>
-                                        </span>
+                            <span class="icon text-white-50">
+                                <i id="quarterSalesVolumeExpandBtnIcon" class="fas fa-expand"></i>
+                            </span>
                             <span id="quarterSalesVolumeExpandText" class="text">더보기</span>
                         </a>
                     </div>
@@ -426,9 +427,9 @@
                     <div class="card-header py-3">
                         <h3 class="m-0 font-weight-bold text-primary" style="float: left;">분기별 점포당 평균 매출 규모 <span style="font-size: 15px">(단위 : 천 원)</span></h3>
                         <a id="marketAvgSalesVolumeBtn" class="btn btn-info btn-icon-split btn-sm" style="float:right;">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exchange"></i>
-                                        </span>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-exchange"></i>
+                            </span>
                             <span id="marketAvgSalesVolumeBtnText" class="text">변화율로 보기</span>
                         </a>
                     </div>
@@ -579,7 +580,7 @@
                 sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
                 dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
                 s = '',
-                toFixedFix = function(n, prec) {
+                toFixedFix = function (n, prec) {
                     var k = Math.pow(10, prec);
                     return '' + Math.round(n * k) / k;
                 };
@@ -619,14 +620,13 @@
         }
 
         function updateRatioChartOptions(chart, isRatioChart, unit) {
-            if(isRatioChart){
-                chart.options.tooltips.callbacks.label = function(tooltipItem, chart) {
+            if (isRatioChart) {
+                chart.options.tooltips.callbacks.label = function (tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                     return datasetLabel + ' : ' + tooltipItem.yLabel + '%';
                 };
-            }
-            else{
-                chart.options.tooltips.callbacks.label = function(tooltipItem, chart) {
+            } else {
+                chart.options.tooltips.callbacks.label = function (tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                     return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + unit;
                 };
@@ -639,11 +639,11 @@
         function getNearTimePopData(nearDistrict) {
             $.ajax({
                 url: "/getNearTimePopData",
-                data: {nearDistrict:nearDistrict},
+                data: {nearDistrict: nearDistrict},
                 method: "GET",
                 dataType: "script"
             })
-                .done(function(script) {
+                .done(function (script) {
                     dataset = {
                         label: nearDistrict,
                         lineTension: 0.3,
@@ -671,12 +671,13 @@
             $.ajax({
                 url: "/getNearTimeSalesVolumeData",
                 data: {
-                    category:category,
-                    nearDistrict:nearDistrict},
+                    category: category,
+                    nearDistrict: nearDistrict
+                },
                 method: "GET",
                 dataType: "script"
             })
-                .done(function(script) {
+                .done(function (script) {
                     if (script == '[]') {
                         $('#noDataModal').modal();
                         return;
@@ -734,12 +735,12 @@
                     displayColors: false,
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, data) {
+                        label: function (tooltipItem, data) {
                             const value = data['datasets'][0]['data'][tooltipItem['index']]
                             const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
                                 return sum + currValue;
                             }, 0);
-                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "원, " + Math.round((value/sum)*100) + "%";
+                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "원, " + Math.round((value / sum) * 100) + "%";
                         }
                     }
                 },
@@ -786,12 +787,12 @@
                     displayColors: false,
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, data) {
+                        label: function (tooltipItem, data) {
                             const value = data['datasets'][0]['data'][tooltipItem['index']]
                             const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
                                 return sum + currValue;
                             }, 0);
-                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "원, " + Math.round((value/sum)*100) + "%";
+                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "원, " + Math.round((value / sum) * 100) + "%";
                         }
                     }
                 },
@@ -837,12 +838,12 @@
                     displayColors: false,
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, data) {
+                        label: function (tooltipItem, data) {
                             const value = data['datasets'][0]['data'][tooltipItem['index']]
                             const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
                                 return sum + currValue;
                             }, 0);
-                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "개, " + Math.round((value/sum)*100) + "%";
+                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "개, " + Math.round((value / sum) * 100) + "%";
                         }
                     }
                 },
@@ -871,7 +872,7 @@
                 datasets: [{
                     data: categoryDensity,
                     //backgroundColor: ["#36b9cc", "#e74a3b", "#f6c23e", "#4e73df", "#1cc88a", "#5a5c69"],
-                    backgroundColor: function(context) {
+                    backgroundColor: function (context) {
                         var index = context.dataIndex;
                         if (category == categoryDensityIndex[index]) {
                             return '#36b9cc';
@@ -894,12 +895,12 @@
                     displayColors: false,
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, data) {
+                        label: function (tooltipItem, data) {
                             const value = data['datasets'][0]['data'][tooltipItem['index']]
                             const sum = data['datasets'][0]['data'].reduce(function add(sum, currValue) {
                                 return sum + currValue;
                             }, 0);
-                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "개, " + Math.round((value/sum)*100) + "%";
+                            return data['labels'][tooltipItem['index']] + " : " + number_format(value) + "개, " + Math.round((value / sum) * 100) + "%";
                         }
                     }
                 },
@@ -928,9 +929,9 @@
         var floatingPopChart = new Chart(floatingPopDOM, {
             type: 'bar',
             plugins: [{
-                beforeUpdate: function(chartInstance) {
-                    chartInstance.data.datasets.forEach(function(dataset) {
-                        dataset.backgroundColor = dataset.data.map(function(data) {
+                beforeUpdate: function (chartInstance) {
+                    chartInstance.data.datasets.forEach(function (dataset) {
+                        dataset.backgroundColor = dataset.data.map(function (data) {
                             return data < 0 ? "#e74a3b" : "#4e73df";
                         })
                     })
@@ -974,7 +975,7 @@
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
-                            callback: function(value, index, values) {
+                            callback: function (value, index, values) {
                                 return number_format(value);
                             }
                         },
@@ -1005,7 +1006,7 @@
                     displayColors: false,
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, chart) {
+                        label: function (tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '명';
                         }
@@ -1023,9 +1024,9 @@
         var ageGroupPopChart = new Chart(ageGroupPopDOM, {
             type: 'bar',
             plugins: [{
-                beforeUpdate: function(chartInstance) {
-                    chartInstance.data.datasets.forEach(function(dataset) {
-                        dataset.backgroundColor = dataset.data.map(function(data) {
+                beforeUpdate: function (chartInstance) {
+                    chartInstance.data.datasets.forEach(function (dataset) {
+                        dataset.backgroundColor = dataset.data.map(function (data) {
                             return data < 0 ? "#e74a3b" : "#4e73df";
                         })
                     })
@@ -1069,7 +1070,7 @@
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
-                            callback: function(value, index, values) {
+                            callback: function (value, index, values) {
                                 return number_format(value);
                             }
                         },
@@ -1100,7 +1101,7 @@
                     displayColors: false,
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, chart) {
+                        label: function (tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '명';
                         }
@@ -1161,7 +1162,7 @@
                             suggestedMax: 0,
                             padding: 10,
                             // Include a dollar sign in the ticks
-                            callback: function(value, index, values) {
+                            callback: function (value, index, values) {
                                 return number_format(value);
                             }
                         },
@@ -1193,7 +1194,7 @@
                     mode: 'index',
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, chart) {
+                        label: function (tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '명';
                         }
@@ -1253,7 +1254,7 @@
                             suggestedMin: 0,
                             suggestedMax: 0,
                             padding: 10,
-                            callback: function(value, index, values) {
+                            callback: function (value, index, values) {
                                 return number_format(value);
                             }
                         },
@@ -1285,7 +1286,7 @@
                     mode: 'index',
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, chart) {
+                        label: function (tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '원';
                         }
@@ -1312,9 +1313,9 @@
         var quarterSalesVolumeChart = new Chart(quarterSalesVolumeDOM, {
             type: 'bar',
             plugins: [{
-                beforeUpdate: function(chartInstance) {
-                    chartInstance.data.datasets.forEach(function(dataset) {
-                        dataset.backgroundColor = dataset.data.map(function(data) {
+                beforeUpdate: function (chartInstance) {
+                    chartInstance.data.datasets.forEach(function (dataset) {
+                        dataset.backgroundColor = dataset.data.map(function (data) {
                             return data < 0 ? "#e74a3b" : "#4e73df";
                         })
                     })
@@ -1358,7 +1359,7 @@
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
-                            callback: function(value, index, values) {
+                            callback: function (value, index, values) {
                                 return number_format(value);
                             }
                         },
@@ -1389,7 +1390,7 @@
                     displayColors: false,
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, chart) {
+                        label: function (tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '원';
                         }
@@ -1414,9 +1415,9 @@
         var marketAvgSalesVolumeChart = new Chart(marketAvgSalesVolumeDOM, {
             type: 'bar',
             plugins: [{
-                beforeUpdate: function(chartInstance) {
-                    chartInstance.data.datasets.forEach(function(dataset) {
-                        dataset.backgroundColor = dataset.data.map(function(data) {
+                beforeUpdate: function (chartInstance) {
+                    chartInstance.data.datasets.forEach(function (dataset) {
+                        dataset.backgroundColor = dataset.data.map(function (data) {
                             return data < 0 ? "#e74a3b" : "#4e73df";
                         })
                     })
@@ -1460,7 +1461,7 @@
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
-                            callback: function(value, index, values) {
+                            callback: function (value, index, values) {
                                 return number_format(value);
                             }
                         },
@@ -1491,7 +1492,7 @@
                     displayColors: false,
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, chart) {
+                        label: function (tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ' : ' + number_format(tooltipItem.yLabel) + '원';
                         }
@@ -1511,18 +1512,18 @@
         var quarterSalesVolumeShowRatio = true;
         var marketAvgSalesVolumeShowRatio = true;
 
-        $(function() {
-            $(document).on('click', '#floatingPopBtn', function() {
+        $(function () {
+            $(document).on('click', '#floatingPopBtn', function () {
                 var floatingPopulationCopy = floatingPopulation.slice();
                 var floatingPopIndexCopy = floatingPopIndex.slice();
                 var floatingPopChangeRatioCopy = floatingPopChangeRatio.slice();
                 var floatingPopChangeRatioIndexCopy = floatingPopChangeRatioIndex.slice();
 
-                if(floatingPopShowRatio){
-                    for(let i=0; i<floatingPopulationCopy.length; i++){
+                if (floatingPopShowRatio) {
+                    for (let i = 0; i < floatingPopulationCopy.length; i++) {
                         removeData(floatingPopChart);
                     }
-                    for(let i=0; i<floatingPopChangeRatioCopy.length; i++){
+                    for (let i = 0; i < floatingPopChangeRatioCopy.length; i++) {
                         addData(floatingPopChart, floatingPopChangeRatioIndex[i], floatingPopChangeRatio[i]);
                     }
                     updateRatioChartOptions(floatingPopChart, floatingPopShowRatio, "명");
@@ -1530,12 +1531,11 @@
                     floatingPopIndex = floatingPopIndexCopy.slice();
                     floatingPopShowRatio = false;
                     $('#floatingPopBtnText').text("인구 수로 보기");
-                }
-                else{
-                    for(let i=0; i<floatingPopChangeRatioCopy.length; i++){
+                } else {
+                    for (let i = 0; i < floatingPopChangeRatioCopy.length; i++) {
                         removeData(floatingPopChart);
                     }
-                    for(let i=0; i<floatingPopulationCopy.length; i++){
+                    for (let i = 0; i < floatingPopulationCopy.length; i++) {
                         addData(floatingPopChart, floatingPopIndex[i], floatingPopulation[i]);
                     }
                     updateRatioChartOptions(floatingPopChart, floatingPopShowRatio, "명");
@@ -1546,17 +1546,17 @@
                 }
             });
 
-            $(document).on('click', '#quarterSalesVolumeBtn', function() {
+            $(document).on('click', '#quarterSalesVolumeBtn', function () {
                 var quarterSalesVolumeCopy = quarterSalesVolume.slice();
                 var quarterSalesVolumeIndexCopy = quarterSalesVolumeIndex.slice();
                 var quarterSalesVolumeChangeRatioCopy = quarterSalesVolumeChangeRatio.slice();
                 var quarterSalesVolumeChangeRatioIndexCopy = quarterSalesVolumeChangeRatioIndex.slice();
 
-                if(quarterSalesVolumeShowRatio){
-                    for(let i=0; i<quarterSalesVolumeCopy.length; i++){
+                if (quarterSalesVolumeShowRatio) {
+                    for (let i = 0; i < quarterSalesVolumeCopy.length; i++) {
                         removeData(quarterSalesVolumeChart);
                     }
-                    for(let i=0; i<quarterSalesVolumeChangeRatioCopy.length; i++){
+                    for (let i = 0; i < quarterSalesVolumeChangeRatioCopy.length; i++) {
                         addData(quarterSalesVolumeChart, quarterSalesVolumeChangeRatioIndex[i], quarterSalesVolumeChangeRatio[i]);
                     }
                     updateRatioChartOptions(quarterSalesVolumeChart, quarterSalesVolumeShowRatio, "원");
@@ -1564,12 +1564,11 @@
                     quarterSalesVolumeIndex = quarterSalesVolumeIndexCopy.slice();
                     quarterSalesVolumeShowRatio = false;
                     $('#quarterSalesVolumeBtnText').text("매출 규모로 보기");
-                }
-                else{
-                    for(let i=0; i<quarterSalesVolumeChangeRatioCopy.length; i++){
+                } else {
+                    for (let i = 0; i < quarterSalesVolumeChangeRatioCopy.length; i++) {
                         removeData(quarterSalesVolumeChart);
                     }
-                    for(let i=0; i<quarterSalesVolumeCopy.length; i++){
+                    for (let i = 0; i < quarterSalesVolumeCopy.length; i++) {
                         addData(quarterSalesVolumeChart, quarterSalesVolumeIndex[i], quarterSalesVolume[i]);
                     }
                     updateRatioChartOptions(quarterSalesVolumeChart, quarterSalesVolumeShowRatio, "원");
@@ -1580,17 +1579,17 @@
                 }
             });
 
-            $(document).on('click', '#marketAvgSalesVolumeBtn', function() {
+            $(document).on('click', '#marketAvgSalesVolumeBtn', function () {
                 var marketAvgSalesVolumeCopy = marketAvgSalesVolume.slice();
                 var marketAvgSalesVolumeIndexCopy = marketAvgSalesVolumeIndex.slice();
                 var marketAvgSalesVolumeChangeRatioCopy = marketAvgSalesVolumeChangeRatio.slice();
                 var marketAvgSalesVolumeChangeRatioIndexCopy = marketAvgSalesVolumeChangeRatioIndex.slice();
 
-                if(marketAvgSalesVolumeShowRatio){
-                    for(let i=0; i<marketAvgSalesVolumeCopy.length; i++){
+                if (marketAvgSalesVolumeShowRatio) {
+                    for (let i = 0; i < marketAvgSalesVolumeCopy.length; i++) {
                         removeData(marketAvgSalesVolumeChart);
                     }
-                    for(let i=0; i<marketAvgSalesVolumeChangeRatioCopy.length; i++){
+                    for (let i = 0; i < marketAvgSalesVolumeChangeRatioCopy.length; i++) {
                         addData(marketAvgSalesVolumeChart, marketAvgSalesVolumeChangeRatioIndex[i], marketAvgSalesVolumeChangeRatio[i]);
                     }
                     updateRatioChartOptions(marketAvgSalesVolumeChart, marketAvgSalesVolumeShowRatio, "원");
@@ -1598,12 +1597,11 @@
                     marketAvgSalesVolumeIndex = marketAvgSalesVolumeIndexCopy.slice();
                     marketAvgSalesVolumeShowRatio = false;
                     $('#marketAvgSalesVolumeBtnText').text("매출 규모로 보기");
-                }
-                else{
-                    for(let i=0; i<marketAvgSalesVolumeChangeRatioCopy.length; i++){
+                } else {
+                    for (let i = 0; i < marketAvgSalesVolumeChangeRatioCopy.length; i++) {
                         removeData(marketAvgSalesVolumeChart);
                     }
-                    for(let i=0; i<marketAvgSalesVolumeCopy.length; i++){
+                    for (let i = 0; i < marketAvgSalesVolumeCopy.length; i++) {
                         addData(marketAvgSalesVolumeChart, marketAvgSalesVolumeIndex[i], marketAvgSalesVolume[i]);
                     }
                     updateRatioChartOptions(marketAvgSalesVolumeChart, marketAvgSalesVolumeShowRatio, "원");
@@ -1620,8 +1618,8 @@
         var floatingPopExpand = true;
         var quarterSalesVolumeExpand = true;
 
-        $(function() {
-            $('#floatingPopExpandBtn').on('click', function() {
+        $(function () {
+            $('#floatingPopExpandBtn').on('click', function () {
                 var floatingPopulationCopy = floatingPopulation.slice();
                 var floatingPopIndexCopy = floatingPopIndex.slice();
                 var wholeFloatingPopulationCopy = wholeFloatingPopulation.slice();
@@ -1630,10 +1628,10 @@
                 if (floatingPopExpand) {
                     $('#floatingPopContentsDIV').addClass('col-xl-12');
 
-                    for(let i=0; i<floatingPopulationCopy.length; i++){
+                    for (let i = 0; i < floatingPopulationCopy.length; i++) {
                         removeData(floatingPopChart);
                     }
-                    for(let i=0; i<wholeFloatingPopulationCopy.length; i++){
+                    for (let i = 0; i < wholeFloatingPopulationCopy.length; i++) {
                         addData(floatingPopChart, wholeFloatingPopIndex[i], wholeFloatingPopulation[i]);
                     }
                     floatingPopulation = floatingPopulationCopy.slice();
@@ -1645,14 +1643,13 @@
                     $('#floatingPopExpandBtnIcon').addClass('fa-compress');
                     $('#floatingPopBtn').hide();
                     floatingPopExpand = false;
-                }
-                else {
+                } else {
                     $('#floatingPopContentsDIV').removeClass('col-xl-12');
 
-                    for(let i=0; i<wholeFloatingPopulationCopy.length; i++){
+                    for (let i = 0; i < wholeFloatingPopulationCopy.length; i++) {
                         removeData(floatingPopChart);
                     }
-                    for(let i=0; i<floatingPopulationCopy.length; i++){
+                    for (let i = 0; i < floatingPopulationCopy.length; i++) {
                         addData(floatingPopChart, floatingPopIndex[i], floatingPopulation[i]);
                     }
                     wholeFloatingPopulation = wholeFloatingPopulationCopy.slice();
@@ -1667,7 +1664,7 @@
                 }
             });
 
-            $('#quarterSalesVolumeExpandBtn').on('click', function() {
+            $('#quarterSalesVolumeExpandBtn').on('click', function () {
                 var quarterSalesVolumeCopy = quarterSalesVolume.slice();
                 var quarterSalesVolumeIndexCopy = quarterSalesVolumeIndex.slice();
                 var wholeQuarterSalesVolumeCopy = wholeQuarterSalesVolume.slice();
@@ -1676,10 +1673,10 @@
                 if (quarterSalesVolumeExpand) {
                     $('#quarterSalesVolumeContentsDIV').addClass('col-xl-12');
 
-                    for(let i=0; i<quarterSalesVolumeCopy.length; i++){
+                    for (let i = 0; i < quarterSalesVolumeCopy.length; i++) {
                         removeData(quarterSalesVolumeChart);
                     }
-                    for(let i=0; i<wholeQuarterSalesVolumeCopy.length; i++){
+                    for (let i = 0; i < wholeQuarterSalesVolumeCopy.length; i++) {
                         addData(quarterSalesVolumeChart, wholeQuarterSalesVolumeIndex[i], wholeQuarterSalesVolume[i]);
                     }
                     quarterSalesVolume = quarterSalesVolumeCopy.slice();
@@ -1691,14 +1688,13 @@
                     $('#quarterSalesVolumeExpandBtnIcon').addClass('fa-compress');
                     $('#quarterSalesVolumeBtn').hide();
                     quarterSalesVolumeExpand = false;
-                }
-                else {
+                } else {
                     $('#quarterSalesVolumeContentsDIV').removeClass('col-xl-12');
 
-                    for(let i=0; i<wholeQuarterSalesVolumeCopy.length; i++){
+                    for (let i = 0; i < wholeQuarterSalesVolumeCopy.length; i++) {
                         removeData(quarterSalesVolumeChart);
                     }
-                    for(let i=0; i<quarterSalesVolumeCopy.length; i++){
+                    for (let i = 0; i < quarterSalesVolumeCopy.length; i++) {
                         addData(quarterSalesVolumeChart, quarterSalesVolumeIndex[i], quarterSalesVolume[i]);
                     }
                     wholeQuarterSalesVolume = wholeQuarterSalesVolumeCopy.slice();
@@ -1714,7 +1710,8 @@
             });
         });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
         function savePDF() {
             html2pdf().from($('.container-fluid')[0]).set({

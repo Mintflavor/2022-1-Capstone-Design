@@ -39,6 +39,8 @@
         MathJax.Hub.Config({
             tex2jax: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }
         });
+
+
     </script>
     <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -111,9 +113,7 @@
                 </button>
 
                 <!-- Topbar Search -->
-                <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                        method="get" action="/dashboard.html">
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get" action="/dashboard.html">
                     <div class="input-group">
                         <select id="guSelect" class="form-select mr-2" aria-label="gu" name="gu">
                             {% if gu == "" %}
@@ -190,18 +190,18 @@
 
         //상권, 업종 셀렉터 변경 jquery
 
-        (function($) {
+        (function ($) {
             // Populates a select drop-down with options in a list 
-            $.fn.populate = function(list) {
+            $.fn.populate = function (list) {
                 return this.append(list.map(item => $('<option>', {
                     text: item
                 })));
             };
         })(jQuery);
 
-        (function($) {
+        (function ($) {
             // Populates a select drop-down with options in a list 
-            $.fn.populateDisabled = function(list) {
+            $.fn.populateDisabled = function (list) {
                 return this.append(list.map(item => $('<option>', {
                     selected: true,
                     disabled: true,
@@ -210,15 +210,15 @@
             };
         })(jQuery);
 
-        $(function() {
-            $('#guSelect').on('change', function() {
+        $(function () {
+            $('#guSelect').on('change', function () {
                 $.ajax({
                     url: "/getDongList",
-                    data: {gu:$('#guSelect option:selected').text()},
+                    data: {gu: $('#guSelect option:selected').text()},
                     method: "GET",
                     dataType: "script"
                 })
-                    .done(function(script) {
+                    .done(function (script) {
                         $('#dongSelect').empty().populateDisabled(['동 선택']).populate(eval(script));
                         $('#searchBtn').addClass('disabled');
                         $('#searchBtn').attr('disabled', true);
@@ -226,15 +226,15 @@
             });
         })
 
-        $(function() {
-            $('#dongSelect').on('change', function() {
+        $(function () {
+            $('#dongSelect').on('change', function () {
                 $.ajax({
                     url: "/getDistricts",
-                    data: {dong:$('#dongSelect option:selected').text()},
+                    data: {dong: $('#dongSelect option:selected').text()},
                     method: "GET",
                     dataType: "script"
                 })
-                    .done(function(script) {
+                    .done(function (script) {
                         $('#districtSelect').empty().populateDisabled(['상권명 선택']).populate(eval(script));
                         $('#searchBtn').addClass('disabled');
                         $('#searchBtn').attr('disabled', true);
@@ -242,15 +242,15 @@
             });
         })
 
-        $(function() {
-            $('#districtSelect').on('change', function() {
+        $(function () {
+            $('#districtSelect').on('change', function () {
                 $.ajax({
                     url: "/getCategories",
-                    data: {district:$('#districtSelect option:selected').text()},
+                    data: {district: $('#districtSelect option:selected').text()},
                     method: "GET",
                     dataType: "script"
                 })
-                    .done(function(script) {
+                    .done(function (script) {
                         $('#categorySelect').empty().populateDisabled(['업종명 선택']).populate(eval(script));
                         $('#searchBtn').addClass('disabled');
                         $('#searchBtn').attr('disabled', true);
@@ -258,13 +258,12 @@
             });
         })
 
-        $(function() {
-            $('#categorySelect').on('change', function() {
+        $(function () {
+            $('#categorySelect').on('change', function () {
                 if ($('#categorySelect option:selected').text() == "업종명 선택") {
                     $('#searchBtn').addClass('disabled');
                     $('#searchBtn').attr('disabled', true);
-                }
-                else {
+                } else {
                     $('#searchBtn').removeClass('disabled');
                     $('#searchBtn').attr('disabled', false);
                 }
@@ -274,12 +273,12 @@
         if ($('#categorySelect option:selected').text() == "업종명 선택") {
             $('#searchBtn').addClass('disabled');
             $('#searchBtn').attr('disabled', true);
-        }
-        else {
+        } else {
             $('#searchBtn').removeClass('disabled');
             $('#searchBtn').attr('disabled', false);
         }
     </script>
+</div>
 </body>
 
 </html>
